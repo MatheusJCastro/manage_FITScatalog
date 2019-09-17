@@ -24,8 +24,11 @@ mancat.close(catalog)
 
 print(elements)
 
-x_axis = "X_IMAGE"
-y_axis = "Y_IMAGE"
+x_axis = "ALPHA_J2000"
+y_axis = "DELTA_J2000"
+# x_axis = "MAG_AUTO"
+# y_axis = "MAGERR_AUTO"
+fmt = "png"
 
 x_column = elements.index(x_axis)
 y_column = elements.index(y_axis)
@@ -36,10 +39,11 @@ for i in range(len(data)):
     x_points.append(data[i][x_column])
     y_points.append(data[i][y_column])
 
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(5, 5))
 plt.xlabel(x_axis)
 plt.ylabel(y_axis)
 plt.title("{} and {}".format(x_axis, y_axis))
-plt.plot(x_points, y_points, ".")
+plt.plot(x_points, y_points, ".", markersize=1)
+plt.savefig("Plot_{}x{}.{}".format(x_axis, y_axis, fmt), format=fmt)
 
 plt.show()

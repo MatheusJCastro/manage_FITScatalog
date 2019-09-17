@@ -50,8 +50,6 @@ def get_header(catalog_file, save=False, extension=2):
         if "TTYPE" in dic[i]:
             element.append(header[i])
 
-    # np.savetxt("Data.txt", [element], fmt="%s", delimiter=",")
-
     # transfor element array into a string of the elements
     str_element = ""
     for i in range(len(element)):
