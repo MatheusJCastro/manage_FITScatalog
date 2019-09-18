@@ -1,7 +1,7 @@
 ###########################################
 # Plot Fits Catalog                       #
 # Matheus J. Castro                       #
-# Version 1.0                             #
+# Version 2.1                             #
 # Last Modification: 17/09/2019           #
 ###########################################
 
@@ -22,14 +22,22 @@ elements = mancat.get_header(catalog)[0]  # elements of catalog
 data = mancat.get_data(catalog)  # data of catalog
 mancat.close(catalog)
 
-print(elements)
+choose = True
+if choose:
+    print("Available options for plot:\n|", end="")
+    for i in range(len(elements)):
+        print(" {:{}}|".format(elements[i], len(max(elements, key=len))+1), end="")
+        if (i+1)%7 == 0:
+            print("\n|", end="")
+    print("")
+    x_axis, y_axis = input("Enter chosen options separated by spaces: ").upper().split()
+else:
+    x_axis = "ALPHA_J2000"
+    y_axis = "DELTA_J2000"
+    # x_axis = "MAG_AUTO"
+    # y_axis = "MAGERR_AUTO"
 
-x_axis = "ALPHA_J2000"
-y_axis = "DELTA_J2000"
-# x_axis = "MAG_AUTO"
-# y_axis = "MAGERR_AUTO"
 fmt = "png"
-
 x_column = elements.index(x_axis)
 y_column = elements.index(y_axis)
 
@@ -44,6 +52,6 @@ plt.xlabel(x_axis)
 plt.ylabel(y_axis)
 plt.title("{} and {}".format(x_axis, y_axis))
 plt.plot(x_points, y_points, ".", markersize=1)
-plt.savefig("Plot_{}x{}.{}".format(x_axis, y_axis, fmt), format=fmt)
+plt.savefig("Plot_{}_{}.{}".format(x_axis, y_axis, fmt), format=fmt)
 
 plt.show()
