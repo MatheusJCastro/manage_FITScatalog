@@ -62,6 +62,6 @@ plt.xlabel(x_axis)
 plt.ylabel(y_axis)
 plt.title("{} and {}".format(x_axis, y_axis))
 plt.plot(x_points, y_points, ".", markersize=1)
-#plt.savefig("Plot_{}_{}.{}".format(x_axis, y_axis, fmt), format=fmt)
+plt.savefig("Plot_{}_{}.{}".format(x_axis, y_axis, fmt), format=fmt)
 
 plt.show()
