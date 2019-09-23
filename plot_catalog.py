@@ -1,8 +1,8 @@
 ###########################################
 # Plot Fits Catalog                       #
 # Matheus J. Castro                       #
-# Version 2.1                             #
-# Last Modification: 17/09/2019           #
+# Version 2.2                             #
+# Last Modification: 22/09/2019           #
 ###########################################
 
 import numpy as np
@@ -26,11 +26,21 @@ choose = True
 if choose:
     print("Available options for plot:\n|", end="")
     for i in range(len(elements)):
-        print(" {:{}}|".format(elements[i], len(max(elements, key=len))+1), end="")
-        if (i+1)%7 == 0:
+        print("{:2}- {:{}}|".format(i+1, elements[i], len(max(elements, key=len))+1), end="")
+        if (i+1)%6 == 0:
             print("\n|", end="")
     print("")
-    x_axis, y_axis = input("Enter chosen options separated by spaces: ").upper().split()
+    x, y = input("Enter chosen options separated by spaces (can be numbers or names): ").upper().split()
+
+    if x.isnumeric():
+        x_axis = elements[int(x)-1]
+    else:
+        x_axis = x
+
+    if y.isnumeric():
+        y_axis = elements[int(y)-1]
+    else:
+        y_axis = y
 else:
     x_axis = "ALPHA_J2000"
     y_axis = "DELTA_J2000"
@@ -52,6 +62,6 @@ plt.xlabel(x_axis)
 plt.ylabel(y_axis)
 plt.title("{} and {}".format(x_axis, y_axis))
 plt.plot(x_points, y_points, ".", markersize=1)
-plt.savefig("Plot_{}_{}.{}".format(x_axis, y_axis, fmt), format=fmt)
+#plt.savefig("Plot_{}_{}.{}".format(x_axis, y_axis, fmt), format=fmt)
 
 plt.show()
