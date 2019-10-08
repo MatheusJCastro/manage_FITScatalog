@@ -1,7 +1,7 @@
 ###########################################
 # Cross-Match Fits Catalog                #
 # Matheus J. Castro                       #
-# Version 1.1                             #
+# Version 1.2                             #
 # Last Modification: 07/10/2019           #
 ###########################################
 
@@ -54,24 +54,33 @@ def find_index():
 
     ind_ar = elements[0].index(ar)
     ind_dc = elements[0].index(dc)
-    # print(ind_ar, ind_dc)
+
+    ar_list_1 = []
+    dc_list_1 = []
+    ar_list_2 = []
+    dc_list_2 = []
+    for i in range(len(data[0])):
+        ar_list_1.append(data[0][i][ind_ar])
+        dc_list_1.append(data[0][i][ind_dc])
+    for i in range(len(data[1])):
+        ar_list_2.append(data[1][i][ind_ar])
+        dc_list_2.append(data[1][i][ind_dc])
 
     equal_objects = []
-    # tam = len(data[0])
-    tam = 1000
-    # tam2 = list(range(len(data[1])))
-    tam2 = list(range(2000))
+    tam = len(data[0])
+    tam2 = list(range(len(data[1])))
+    # tam2 = list(range(1000))
     for i in range(tam):
         for j in tam2:
-            ar_check = check_equal(data[0][i][ind_ar], data[1][j][ind_ar])
-            dc_check = check_equal(data[0][i][ind_dc], data[1][j][ind_dc])
+            ar_check = check_equal(ar_list_1[i], ar_list_2[j])
+            dc_check = check_equal(dc_list_1[i], dc_list_2[j])
             if ar_check and dc_check:
                 equal_objects.append((i, j))
-                tam2.remove(tam2[equal_objects[len(equal_objects)-1][1]])
+                tam2.remove(j)
                 break
-        print("Load: {:.3f}%".format(((i+1)/tam)*100))
+        print("Load: {:.2f}%".format(((i+1)/tam)*100))
+    print("Number of founded objects:", len(equal_objects))
 
-    print("Founded objects:", equal_objects)
     return equal_objects, ar, ind_ar, dc, ind_dc
 
 
@@ -101,7 +110,6 @@ def get_mag(obj, ind_ar, ind_dc):
     for i in range(len(mags)):
         new_mags.append(("{:d}".format(i+1), data[0][i][ind_ar], data[0][i][ind_dc], mags[i][0], mags[i][1]))
 
-    print(mags)
     return mags, new_mags
 
 
