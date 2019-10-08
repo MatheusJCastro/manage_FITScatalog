@@ -58,14 +58,17 @@ def find_index():
 
     equal_objects = []
     tam = len(data[0])
-    process = []
+    tam2 = list(range(len(data[1])))
     for i in range(tam):
-        for j in range(len(data[1])):
+        for j in tam2:
             ar_check = check_equal(data[0][i][ind_ar], data[1][j][ind_ar])
             dc_check = check_equal(data[0][i][ind_dc], data[1][j][ind_dc])
             if ar_check and dc_check:
                 equal_objects.append((i, j))
+                tam2.remove(tam2[equal_objects[len(equal_objects)-1][1]])
+                break
         print("Load: {:.3f}%".format((i/tam)*100))
+        print(len(tam2))
 
     print(equal_objects)
 
