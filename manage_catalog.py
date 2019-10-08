@@ -8,6 +8,7 @@
 import numpy as np
 from astropy.io import fits
 
+
 ######################################################################################
 
 
@@ -33,6 +34,7 @@ def save_catalog(catalog_file, ext_names, str_element):
 
     np.savetxt("Extension{}_{}.csv".format(2, ext_names[2]), new_data, header=str_element, fmt="%s", delimiter=",")
 
+
 ######################################################################################
 
 
@@ -54,10 +56,13 @@ def get_header(catalog_file, save=False, extension=2):
     str_element = ""
     for i in range(len(element)):
         str_element = str_element + "," + repr(element[i])
-    str_element = str_element[1:].replace("'","")
+    str_element = str_element[1:].replace("'", "")
     # print(str_element)
 
     return element, str_element
+    # return elements of the header on first variable
+    # and the string of it on the second variable
+
 
 ######################################################################################
 
@@ -67,6 +72,7 @@ def get_data(catalog_file, extension=2):
     data = catalog_file[extension].data
 
     return data
+
 
 ######################################################################################
 
@@ -87,21 +93,23 @@ def get_info(catalog_file):
 
     return info, ext_names
 
+
 ######################################################################################
 
 
 def cat_open(cat_name):
-
     # Open the catalog
     catalog_file = fits.open(cat_name)
 
     return catalog_file
+
 
 ######################################################################################
 
 
 def close(catalog_file):
     catalog_file.close()
+
 
 ######################################################################################
 
