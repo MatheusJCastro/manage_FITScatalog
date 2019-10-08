@@ -12,7 +12,7 @@ import manage_catalog as mancat
 catalog = mancat.cat_open('j02-20170711T001143-01_proc.proccat')
 
 # save catalog in a csv file
-mancat.save_catalog(catalog, mancat.get_info(catalog)[1], mancat.get_header(catalog)[1])
+# mancat.save_catalog(catalog, mancat.get_info(catalog)[1], mancat.get_header(catalog)[1])
 
 # get info about catalog
 # check the extension do you want to use, the default is 2.
@@ -22,7 +22,7 @@ elements = mancat.get_header(catalog)[0]  # elements of catalog
 data = mancat.get_data(catalog)  # data of catalog
 mancat.close(catalog)
 
-choose = False
+choose = True
 if choose:
     print("Available options for plot:\n|", end="")
     for i in range(len(elements)):
