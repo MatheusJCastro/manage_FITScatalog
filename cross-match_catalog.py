@@ -1,7 +1,7 @@
 ###########################################
 # Cross-Match Fits Catalog                #
 # Matheus J. Castro                       #
-# Version 1.0                             #
+# Version 1.1                             #
 # Last Modification: 07/10/2019           #
 ###########################################
 
@@ -57,8 +57,10 @@ def find_index():
     # print(ind_ar, ind_dc)
 
     equal_objects = []
-    tam = len(data[0])
-    tam2 = list(range(len(data[1])))
+    # tam = len(data[0])
+    tam = 1000
+    # tam2 = list(range(len(data[1])))
+    tam2 = list(range(2000))
     for i in range(tam):
         for j in tam2:
             ar_check = check_equal(data[0][i][ind_ar], data[1][j][ind_ar])
@@ -67,13 +69,13 @@ def find_index():
                 equal_objects.append((i, j))
                 tam2.remove(tam2[equal_objects[len(equal_objects)-1][1]])
                 break
-        print("Load: {:.3f}%".format((i/tam)*100))
-        print(len(tam2))
+        print("Load: {:.3f}%".format(((i+1)/tam)*100))
 
-    print(equal_objects)
+    print("Founded objects:", equal_objects)
+    return equal_objects, ar, ind_ar, dc, ind_dc
 
 
-def check_equal(n, m, threshold=1):
+def check_equal(n, m, threshold=3):
     # threshold in arcsecond
     # need to transform to degrees
     threshold = threshold / 60**2
@@ -84,5 +86,82 @@ def check_equal(n, m, threshold=1):
         return False
 
 
-x = setup()
-find_index()
+def get_mag(obj, ind_ar, ind_dc):
+    global data
+
+    mag = "MAG_AUTO"
+    ind = elements[0].index(mag)
+
+    mags = []
+
+    for i in range(len(obj)):
+        mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))
+
+    new_mags = []
+    for i in range(len(mags)):
+        new_mags.append(("{:d}".format(i+1), data[0][i][ind_ar], data[0][i][ind_dc], mags[i][0], mags[i][1]))
+
+    print(mags)
+    return mags, new_mags
+
+
+def save_mags(listofmag, ar, dc):
+    global data
+
+    head = "Number, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
+    np.savetxt("Magnitudes_compared.csv", listofmag, header=head, fmt="%s", delimiter=",")
+
+
+def plot_mags(listofmag, ar, dc):
+
+    x_axis = "MAGS of CAT 1"
+    y_axis = "MAGS of CAT 2"
+
+    x_points = []
+    y_points = []
+    x_position = []
+    y_position = []
+    for i in range(len(listofmag)):
+        if listofmag[i][3] <= 30 and listofmag[i][4] <= 30:
+            x_points.append(listofmag[i][3])
+            y_points.append(listofmag[i][4])
+        x_position.append(listofmag[i][1])
+        y_position.append(listofmag[i][2])
+
+    xmax = int(max(x_points)) + 1
+    xmin = int(min(x_points)) - 1
+    ymax = int(max(y_points)) + 1
+    ymin = int(min(y_points)) - 1
+
+    if xmax < ymax:
+        xmax = ymax
+    if xmin > ymin:
+        xmin = ymin
+
+    plt.figure(figsize=(12, 5))
+
+    plt.subplot(121)
+    plt.xlim(xmin, xmax)
+    plt.ylim(xmin, xmax)
+    plt.xlabel(x_axis)
+    plt.ylabel(y_axis)
+    plt.title("{} and {}".format(x_axis, y_axis))
+    plt.plot(x_points, y_points, ".", markersize=5)
+    plt.plot([xmin, xmax], [xmin, xmax], "-", markersize=5)
+
+    plt.subplot(122)
+    plt.xlabel(ar)
+    plt.ylabel(dc)
+    plt.title("{} and {}".format(ar, dc))
+    plt.plot(x_position, y_position, ".", markersize=5)
+
+    fmt = "png"
+    plt.savefig("Plot_Variation_of_Mags.{}".format(fmt), format=fmt)
+    plt.show()
+
+
+setup()
+objects, alpha, ind_alpha, delta, ind_delta = find_index()
+mag_list, mag_pos_list = get_mag(objects, ind_alpha, ind_delta)
+save_mags(mag_pos_list, alpha, delta)
+plot_mags(mag_pos_list, alpha, delta)
