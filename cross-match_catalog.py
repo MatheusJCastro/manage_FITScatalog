@@ -73,12 +73,13 @@ def find_index():
     for i in range(tam):
         for j in tam2:
             ar_check = check_equal(ar_list_1[i], ar_list_2[j])
-            dc_check = check_equal(dc_list_1[i], dc_list_2[j])
+            dc_check = check_equal(dc_list_1[i], dc_list_2[j], threshold=10)
             if ar_check and dc_check:
                 equal_objects.append((i, j))
                 tam2.remove(j)
                 break
         print("Load: {:.2f}%".format(((i+1)/tam)*100))
+    print(equal_objects)
     print("Number of founded objects:", len(equal_objects))
 
     return equal_objects, ar, ind_ar, dc, ind_dc
