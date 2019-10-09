@@ -71,13 +71,17 @@ def find_index():
     tam2 = list(range(len(data[1])))
     # tam2 = list(range(1000))
     for i in range(tam):
+        found = False
+        j_list = []
         for j in tam2:
-            ar_check = check_equal(ar_list_1[i], ar_list_2[j])
-            dc_check = check_equal(dc_list_1[i], dc_list_2[j], threshold=10)
-            if ar_check and dc_check:
-                equal_objects.append((i, j))
-                tam2.remove(j)
-                break
+            check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+            if check:
+                j_list.append(j)
+                found = True
+        if found:
+            best = best_check(j_list, ar_list_1[i], dc_list_1[i], ar_list_2, dc_list_2)
+            equal_objects.append((i, best))
+            tam2.remove(best)
         print("Load: {:.2f}%".format(((i+1)/tam)*100))
     print(equal_objects)
     print("Number of founded objects:", len(equal_objects))
@@ -85,15 +89,47 @@ def find_index():
     return equal_objects, ar, ind_ar, dc, ind_dc
 
 
-def check_equal(n, m, threshold=3):
+def check_equal(n, m, x, y, threshold=3, value=False):
     # threshold in arcsecond
     # need to transform to degrees
     threshold = threshold / 60**2
 
-    if n - threshold <= m <= n + threshold:
+    module = np.sqrt((n-x)**2 + (m-y)**2)
+
+    if value:
+        return module
+
+    if module <= threshold:
         return True
     else:
         return False
+
+
+def best_check(list_compare, m, n, x_list, y_list):
+    result = []
+    for i in list_compare:
+        result.append(check_equal(m, n, x_list[i], y_list[i], value=True))
+    best = list_compare[result.index(min(result))]
+
+    return best
+
+
+def read_index():
+    name_csv = "Magnitudes_compared.csv"
+
+    ar = "ALPHA_J2000"
+    dc = "DELTA_J2000"
+
+    ind_ar = elements[0].index(ar)
+    ind_dc = elements[0].index(dc)
+
+    loaded = np.loadtxt(name_csv, delimiter=",")
+
+    equal_objects = []
+    for i in range(len(loaded)):
+        equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))
+
+    return equal_objects, ar, ind_ar, dc, ind_dc
 
 
 def get_mag(obj, ind_ar, ind_dc):
@@ -109,7 +145,7 @@ def get_mag(obj, ind_ar, ind_dc):
 
     new_mags = []
     for i in range(len(mags)):
-        new_mags.append(("{:d}".format(i+1), data[0][i][ind_ar], data[0][i][ind_dc], mags[i][0], mags[i][1]))
+        new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar], data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
 
     return mags, new_mags
 
@@ -117,8 +153,57 @@ def get_mag(obj, ind_ar, ind_dc):
 def save_mags(listofmag, ar, dc):
     global data
 
-    head = "Number, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
+    head = "Number, Number_1, Number_2, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
     np.savetxt("Magnitudes_compared.csv", listofmag, header=head, fmt="%s", delimiter=",")
+
+
+def plot_selected(obj, listofmag, ar, dc, ind_ar, ind_dc):
+    global data
+
+    x_axis = "MAGS of CAT 1"
+    y_axis = "MAGS of CAT 2"
+
+    x_position_1 = []
+    y_position_1 = []
+    x_position_1_c = []
+    y_position_1_c = []
+    x_position_2 = []
+    y_position_2 = []
+
+    cat1_eu = [2309-1, 3316-1, 3592-1, 4184-1, 4547-1]
+    cat1_cat = [2317-1, 3324-1, 3599-1, 4193-1, 4555-1]
+    cat2 = [1385-1, 1957-1, 2134-1, 2410-1, 2631-1]
+
+    #cat1 = [1392, 2703, 5717]
+    #cat2 = [829, 1626, 3345]
+
+    for i in cat1_eu:
+        x_position_1.append(data[0][i][ind_ar])
+        y_position_1.append(data[0][i][ind_dc])
+    for i in cat1_cat:
+        x_position_1_c.append(data[0][i][ind_ar])
+        y_position_1_c.append(data[0][i][ind_dc])
+    for i in cat2:
+        x_position_2.append(data[1][i][ind_ar])
+        y_position_2.append(data[1][i][ind_dc])
+
+    error = np.asarray([3/(60**2)]*len(y_position_2))
+
+    plt.figure(figsize=(5, 5))
+    plt.xlabel(ar)
+    plt.ylabel(dc)
+    plt.xlim(56, 57.8)
+    plt.ylim(23.3, 24.9)
+    plt.title("{} and {}".format(ar, dc))
+    # plt.errorbar(x_position_1, y_position_1, yerr=error, xerr=error, fmt="none")
+    plt.errorbar(x_position_2, y_position_2, yerr=error, xerr=error, fmt="none")
+    plt.plot(x_position_1, y_position_1, ".", markersize=5, color="black")
+    plt.plot(x_position_1_c, y_position_1_c, ".", markersize=5, color="green")
+    plt.plot(x_position_2, y_position_2, ".", markersize=5, color="blue")
+
+    fmt = "png"
+    plt.savefig("Plot_Mags.{}".format(fmt), format=fmt)
+    plt.show()
 
 
 def plot_mags(listofmag, ar, dc):
@@ -131,11 +216,11 @@ def plot_mags(listofmag, ar, dc):
     x_position = []
     y_position = []
     for i in range(len(listofmag)):
-        if listofmag[i][3] <= 30 and listofmag[i][4] <= 30:
-            x_points.append(listofmag[i][3])
-            y_points.append(listofmag[i][4])
-        x_position.append(listofmag[i][1])
-        y_position.append(listofmag[i][2])
+        if listofmag[i][5] <= 30 and listofmag[i][6] <= 30:
+            x_points.append(listofmag[i][5])
+            y_points.append(listofmag[i][6])
+        x_position.append(listofmag[i][3])
+        y_position.append(listofmag[i][4])
 
     xmax = int(max(x_points)) + 1
     xmin = int(min(x_points)) - 1
@@ -171,6 +256,8 @@ def plot_mags(listofmag, ar, dc):
 
 setup()
 objects, alpha, ind_alpha, delta, ind_delta = find_index()
+# objects, alpha, ind_alpha, delta, ind_delta = read_index()
 mag_list, mag_pos_list = get_mag(objects, ind_alpha, ind_delta)
-save_mags(mag_pos_list, alpha, delta)
+# save_mags(mag_pos_list, alpha, delta)
 plot_mags(mag_pos_list, alpha, delta)
+#plot_selected(objects, mag_pos_list, alpha, delta, ind_alpha, ind_delta)

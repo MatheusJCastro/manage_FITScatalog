@@ -71,7 +71,7 @@ def find_index():
 
     c = coord.SkyCoord(ar_list_2, dc_list_2, frame="icrs", unit="deg")
     catalog = coord.SkyCoord(ar_list_1, dc_list_1, frame="icrs", unit="deg")
-    idx, d2d, d3d = c.match_to_catalog_sky(catalog)
+    idx, d2d, d3d = c.match_to_catalog_sky(catalog,  nthneighbor=1)
 
     print("Number of founded objects:", len(idx))
     print(idx)
@@ -106,7 +106,7 @@ def get_mag(obj, ind_ar, ind_dc):
 
     new_mags = []
     for i in range(len(mags)):
-        new_mags.append(("{:d}".format(i+1), data[0][i][ind_ar], data[0][i][ind_dc], mags[i][0], mags[i][1]))
+        new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar], data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
 
     return mags, new_mags
 
@@ -114,8 +114,8 @@ def get_mag(obj, ind_ar, ind_dc):
 def save_mags(listofmag, ar, dc):
     global data
 
-    head = "Number, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
-    np.savetxt("Magnitudes_compared.csv", listofmag, header=head, fmt="%s", delimiter=",")
+    head = "Number, Number_1, Number_2, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
+    # np.savetxt("Magnitudes_compared.csv", listofmag, header=head, fmt="%s", delimiter=",")
 
 
 def plot_mags(listofmag, ar, dc):
@@ -128,11 +128,11 @@ def plot_mags(listofmag, ar, dc):
     x_position = []
     y_position = []
     for i in range(len(listofmag)):
-        if listofmag[i][3] <= 30 and listofmag[i][4] <= 30:
-            x_points.append(listofmag[i][3])
-            y_points.append(listofmag[i][4])
-        x_position.append(listofmag[i][1])
-        y_position.append(listofmag[i][2])
+        if listofmag[i][5] <= 30 and listofmag[i][6] <= 30:
+            x_points.append(listofmag[i][5])
+            y_points.append(listofmag[i][6])
+        x_position.append(listofmag[i][3])
+        y_position.append(listofmag[i][4])
 
     xmax = int(max(x_points)) + 1
     xmin = int(min(x_points)) - 1
@@ -162,7 +162,7 @@ def plot_mags(listofmag, ar, dc):
     plt.plot(x_position, y_position, ".", markersize=5)
 
     fmt = "png"
-    plt.savefig("Plot_Variation_of_Mags.{}".format(fmt), format=fmt)
+    # plt.savefig("Plot_Variation_of_Mags.{}".format(fmt), format=fmt)
     plt.show()
 
 
