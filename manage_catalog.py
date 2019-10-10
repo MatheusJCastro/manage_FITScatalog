@@ -30,6 +30,7 @@ def save_catalog(catalog_file, ext_names, str_element):
                 new_data.append(array)
             else:
                 new_data.append(data[i][j])
+        print("Save Catalog: {:.2f}%".format(((i + 1) / line) * 100))
     new_data = np.asarray(new_data).reshape(line, col)
 
     np.savetxt("Extension{}_{}.csv".format(2, ext_names[2]), new_data, header=str_element, fmt="%s", delimiter=",")
@@ -77,12 +78,13 @@ def get_data(catalog_file, extension=2):
 ######################################################################################
 
 
-def get_info(catalog_file):
+def get_info(catalog_file, print_info=False):
     # Get information about names of extension of the .proccat
     info = catalog_file.info(0)
     size = len(info)
 
-    # print(catalog_file.info())
+    if print_info:
+        print(catalog_file.info())
 
     # Create a list of the names of the extensions
     ext_names = []
@@ -112,7 +114,3 @@ def close(catalog_file):
 
 
 ######################################################################################
-
-
-if __name__ == '__main__':
-    cat_open()

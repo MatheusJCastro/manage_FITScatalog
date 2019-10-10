@@ -5,7 +5,6 @@
 # Last Modification: 22/09/2019           #
 ###########################################
 
-import numpy as np
 import matplotlib.pyplot as plt
 import manage_catalog as mancat
 
@@ -27,7 +26,7 @@ if choose:
     print("Available options for plot:\n|", end="")
     for i in range(len(elements)):
         print("{:2}- {:{}}|".format(i+1, elements[i], len(max(elements, key=len))+1), end="")
-        if (i+1)%6 == 0:
+        if (i+1) % 6 == 0:
             print("\n|", end="")
     print("")
     x, y = input("Enter chosen options separated by spaces (can be numbers or names): ").upper().split()
