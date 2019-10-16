@@ -130,6 +130,59 @@ def read_index():
     return equal_objects, ar, ind_ar, dc, ind_dc
 
 
+def read_c():
+    name_csv = "saida.csv"
+
+    ar = "ALPHA_J2000"
+    dc = "DELTA_J2000"
+
+    ind_ar = elements[0].index(ar)
+    ind_dc = elements[0].index(dc)
+
+    loaded = np.loadtxt(name_csv, delimiter=",")
+
+    equal_objects = []
+    for i in range(len(loaded)):
+        equal_objects.append((int(loaded[i][0] - 1), int(loaded[i][1] - 1)))
+
+    return equal_objects, ar, ind_ar, dc, ind_dc
+
+
+def save_lists():
+    ar = "ALPHA_J2000"
+    dc = "DELTA_J2000"
+    ind_ar = elements[0].index(ar)
+    ind_dc = elements[0].index(dc)
+
+    ar_list_1 = []
+    dc_list_1 = []
+    ar_list_2 = []
+    dc_list_2 = []
+    for i in range(len(data[0])):
+        ar_list_1.append(data[0][i][ind_ar])
+        dc_list_1.append(data[0][i][ind_dc])
+    for i in range(len(data[1])):
+        ar_list_2.append(data[1][i][ind_ar])
+        dc_list_2.append(data[1][i][ind_dc])
+
+    lista = [(len(data[0]), len(data[1]))]
+
+    if len(data[0]) >= len(data[1]):
+        for i in range(len(data[0])):
+            if i < len(data[1]):
+                lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+            else:
+                lista.append((ar_list_1[i], dc_list_1[i], 0, 0))
+    else:
+        for i in range(len(data[1])):
+            if i < len(data[0]):
+                lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+            else:
+                lista.append((0, 0, ar_list_2[i], dc_list_2[i]))
+
+    np.savetxt("entrada.csv", lista, fmt="%s", delimiter=",")
+
+
 def get_mag(obj, ind_ar, ind_dc):
     global data
 
@@ -165,9 +218,9 @@ def plot_selected(ar, dc, ind_ar, ind_dc):
     x_position_2 = []
     y_position_2 = []
 
-    cat1_eu = [2309-1, 3316-1, 3592-1, 4184-1, 4547-1]
-    cat1_cat = [335-1]
-    cat2 = [209-1]
+    cat1_eu = [8186-1]
+    cat1_cat = [8199-1]
+    cat2 = [7713-1]
 
     # cat1 = [1392, 2703, 5717]
     # cat2 = [829, 1626, 3345]
@@ -192,7 +245,7 @@ def plot_selected(ar, dc, ind_ar, ind_dc):
     plt.title("{} and {}".format(ar, dc))
     # plt.errorbar(x_position_1, y_position_1, yerr=error, xerr=error, fmt="none")
     plt.errorbar(x_position_2, y_position_2, yerr=error, xerr=error, fmt="none")
-    # plt.plot(x_position_1, y_position_1, ".", markersize=5, color="black")
+    plt.plot(x_position_1, y_position_1, ".", markersize=5, color="black")
     plt.plot(x_position_1_c, y_position_1_c, ".", markersize=5, color="green")
     plt.plot(x_position_2, y_position_2, ".", markersize=5, color="blue")
 
@@ -252,10 +305,12 @@ def plot_mags(listofmag, ar, dc):
 inicio = time.time()
 setup()
 # objects, alpha, ind_alpha, delta, ind_delta = find_index()
-objects, alpha, ind_alpha, delta, ind_delta = read_index()
+# objects, alpha, ind_alpha, delta, ind_delta = read_index()
+objects, alpha, ind_alpha, delta, ind_delta = read_c()
 mag_list, mag_pos_list = get_mag(objects, ind_alpha, ind_delta)
-save_mags(mag_pos_list, alpha, delta)
+# save_mags(mag_pos_list, alpha, delta)
+# save_lists()
 fim = time.time()
 print(fim - inicio)
-# plot_mags(mag_pos_list, alpha, delta)
-plot_selected(alpha, delta, ind_alpha, ind_delta)
+plot_mags(mag_pos_list, alpha, delta)
+#plot_selected(alpha, delta, ind_alpha, ind_delta)
