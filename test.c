@@ -11,7 +11,7 @@ void read_arq(char name_in[100], double coord[4][MAX], int lens[2], int *len)
 	csv = fopen(name_in, "r");
 
 	fscanf(csv, "(%d, %d)\n", &lens[0], &lens[1]);
-	printf("%d %d\n", lens[0], lens[1]);
+	printf("Catalogs len: %d and %d\n", lens[0], lens[1]);
 
 	if (lens[0] >= lens[1])
 	    *len = lens[0];
@@ -80,7 +80,7 @@ int cross_match(int index[2][MAX], double coord[4][MAX], int lens[2], int *len)
         float load = ((i+1.)/lens[0])*100;
     //    printf("Load: %f\n", load);
     }
-    printf("%d\n", count);
+    printf("Found %d objects\n", count);
     return count;
 }
 
@@ -108,7 +108,7 @@ int main()
 
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("%f\n", time_spent);
+    printf("Time C: %f\n", time_spent);
 
     return 0;
 }

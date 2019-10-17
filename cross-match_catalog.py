@@ -47,8 +47,7 @@ def setup():
     return 1
 
 
-def find_index():
-    global data
+def find_index(data, elements):
 
     ar = "ALPHA_J2000"
     dc = "DELTA_J2000"
@@ -128,6 +127,13 @@ def read_index():
         equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))
 
     return equal_objects, ar, ind_ar, dc, ind_dc
+
+
+def execute_c():
+    import ctypes
+
+    c_lib = ctypes.cdll.LoadLibrary("./test.so")
+    c_lib.main()
 
 
 def read_c():
@@ -210,7 +216,6 @@ def save_mags(listofmag, ar, dc):
 
 
 def plot_selected(ar, dc, ind_ar, ind_dc):
-
     x_position_1 = []
     y_position_1 = []
     x_position_1_c = []
@@ -255,7 +260,6 @@ def plot_selected(ar, dc, ind_ar, ind_dc):
 
 
 def plot_mags(listofmag, ar, dc):
-
     x_axis = "MAGS of CAT 1"
     y_axis = "MAGS of CAT 2"
 
@@ -304,13 +308,15 @@ def plot_mags(listofmag, ar, dc):
 
 inicio = time.time()
 setup()
+save_lists()
+# objects, alpha, ind_alpha, delta, ind_delta = mancat.find_index(data, elements)
 # objects, alpha, ind_alpha, delta, ind_delta = find_index()
 # objects, alpha, ind_alpha, delta, ind_delta = read_index()
+#execute_c()
 objects, alpha, ind_alpha, delta, ind_delta = read_c()
 mag_list, mag_pos_list = get_mag(objects, ind_alpha, ind_delta)
 # save_mags(mag_pos_list, alpha, delta)
-# save_lists()
 fim = time.time()
-print(fim - inicio)
+print("Time Python: ", fim - inicio)
 plot_mags(mag_pos_list, alpha, delta)
-#plot_selected(alpha, delta, ind_alpha, ind_delta)
+# plot_selected(alpha, delta, ind_alpha, ind_delta)

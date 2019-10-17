@@ -1,0 +1,2 @@
+gcc test.c -fPIC -shared -o test.so -lm
+python3 setup.py build_ext --inplace
