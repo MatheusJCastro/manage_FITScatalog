@@ -5,10 +5,31 @@
 #define MAX 100000
 #define range 3
 
-void read_arq(char name_in[100], double coord[4][MAX], int lens[2], int *len)
+void changedot(char name_in[100], char name_in_mod[100])
+{
+    FILE *file;
+    FILE *new_file;
+
+    char c;
+    file = fopen(name_in, "r");
+    new_file = fopen(name_in_mod, "w");
+
+    while ((c = getc(file)) != EOF)
+    {
+        if (c == '.')
+            c = ',';
+        fprintf(new_file, "%c", c);
+        //putchar(c);
+    }
+
+    fclose(file);
+    fclose(new_file);
+}
+
+void read_arq(char name_in_mod[100], double coord[4][MAX], int lens[2], int *len)
 {
     FILE *csv;
-	csv = fopen(name_in, "r");
+	csv = fopen(name_in_mod, "r");
 
 	fscanf(csv, "(%d, %d)\n", &lens[0], &lens[1]);
 	printf("Catalogs len: %d and %d\n", lens[0], lens[1]);
@@ -18,7 +39,7 @@ void read_arq(char name_in[100], double coord[4][MAX], int lens[2], int *len)
 	else
 	    *len = lens[1];
 
-    for (int i = 0; i < *len; i++)
+    for (int i = 0; i < *len ; i++)
     {
         fscanf(csv, "(%lf, %lf, %lf, %lf)\n", &coord[0][i], &coord[1][i], &coord[2][i], &coord[3][i]);
 	    //printf("%.15lf %.15lf %.15lf %.15lf\n", coord[0][i], coord[1][i], coord[2][i], coord[3][i]);
@@ -91,18 +112,42 @@ void save_arq(char name_out[100], int index[2][MAX], int founded)
 
     for (int i=0; i<founded; i++)
         fprintf(csv_write, "%d, %d\n", index[0][i], index[1][i]);
+
+    fclose(csv_write);
+}
+
+int py_script()
+{
+    clock_t begin = clock();
+
+    char name_in[100] = "entrada.csv";
+    char name_in_mod[100] = "entrada_mod.csv";
+    char name_out[100] = "saida.csv";
+    double coord[4][MAX];
+    int lens[2], len, index[2][MAX];
+
+    changedot(name_in, name_in_mod);
+    read_arq(name_in_mod, coord, lens, &len);
+    int founded = cross_match(index, coord, lens, &len);
+    save_arq(name_out, index, founded);
+
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Time C: %f\n", time_spent);
+
+    return 0;
 }
 
 int main()
 {
     clock_t begin = clock();
 
-    char name_in[100] = "entrada.csv";
+    char name_in_mod[100] = "entrada.csv";
     char name_out[100] = "saida.csv";
     double coord[4][MAX];
     int lens[2], len, index[2][MAX];
 
-    read_arq(name_in, coord, lens, &len);
+    read_arq(name_in_mod, coord, lens, &len);
     int founded = cross_match(index, coord, lens, &len);
     save_arq(name_out, index, founded);
 

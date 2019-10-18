@@ -133,7 +133,7 @@ def execute_c():
     import ctypes
 
     c_lib = ctypes.cdll.LoadLibrary("./test.so")
-    c_lib.main()
+    c_lib.py_script()
 
 
 def read_c():
@@ -178,7 +178,7 @@ def save_lists():
             if i < len(data[1]):
                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
             else:
-                lista.append((ar_list_1[i], dc_list_1[i], 0, 0))
+                lista.append((ar_list_1[i], dc_list_1[i], 0., 0.))
     else:
         for i in range(len(data[1])):
             if i < len(data[0]):
@@ -186,7 +186,7 @@ def save_lists():
             else:
                 lista.append((0, 0, ar_list_2[i], dc_list_2[i]))
 
-    np.savetxt("entrada.csv", lista, fmt="%s", delimiter=",")
+    np.savetxt("entrada.csv", lista, fmt="%s", delimiter=";")
 
 
 def get_mag(obj, ind_ar, ind_dc):
@@ -312,7 +312,7 @@ save_lists()
 # objects, alpha, ind_alpha, delta, ind_delta = mancat.find_index(data, elements)
 # objects, alpha, ind_alpha, delta, ind_delta = find_index()
 # objects, alpha, ind_alpha, delta, ind_delta = read_index()
-#execute_c()
+execute_c()
 objects, alpha, ind_alpha, delta, ind_delta = read_c()
 mag_list, mag_pos_list = get_mag(objects, ind_alpha, ind_delta)
 # save_mags(mag_pos_list, alpha, delta)
