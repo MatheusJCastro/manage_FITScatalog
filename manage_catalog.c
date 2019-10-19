@@ -1098,6 +1098,14 @@ static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* 
 #define __Pyx_CallUnboundCMethod1(cfunc, self, arg)  __Pyx__CallUnboundCMethod1(cfunc, self, arg)
 #endif
 
+/* PyIntBinop.proto */
+#if !CYTHON_COMPILING_IN_PYPY
+static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, long intval, int inplace, int zerodivision_check);
+#else
+#define __Pyx_PyInt_SubtractObjC(op1, op2, intval, inplace, zerodivision_check)\
+    (inplace ? PyNumber_InPlaceSubtract(op1, op2) : PyNumber_Subtract(op1, op2))
+#endif
+
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
@@ -1214,6 +1222,7 @@ int __pyx_module_is_main_manage_catalog = 0;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_min;
 static const char __pyx_k_[] = "";
+static const char __pyx_k_d[] = "{:d}";
 static const char __pyx_k_i[] = "i";
 static const char __pyx_k_j[] = "j";
 static const char __pyx_k_k[] = "k";
@@ -1225,6 +1234,9 @@ static const char __pyx_k_y[] = "y";
 static const char __pyx_k__2[] = " ";
 static const char __pyx_k__4[] = ",";
 static const char __pyx_k__5[] = "'";
+static const char __pyx_k__7[] = ", ";
+static const char __pyx_k__8[] = ";";
+static const char __pyx_k__9[] = "./{}";
 static const char __pyx_k_ar[] = "ar";
 static const char __pyx_k_dc[] = "dc";
 static const char __pyx_k_np[] = "np";
@@ -1232,15 +1244,21 @@ static const char __pyx_k_col[] = "col";
 static const char __pyx_k_dic[] = "dic";
 static const char __pyx_k_end[] = "end";
 static const char __pyx_k_fmt[] = "fmt";
+static const char __pyx_k_ind[] = "ind";
+static const char __pyx_k_mag[] = "mag";
 static const char __pyx_k_min[] = "min";
+static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_tam[] = "tam";
 static const char __pyx_k_best[] = "best";
+static const char __pyx_k_cdll[] = "cdll";
 static const char __pyx_k_data[] = "data";
 static const char __pyx_k_file[] = "file";
 static const char __pyx_k_fits[] = "fits";
+static const char __pyx_k_head[] = "head";
 static const char __pyx_k_info[] = "info";
 static const char __pyx_k_line[] = "line";
-static const char __pyx_k_main[] = "__main__";
+static const char __pyx_k_mags[] = "mags";
+static const char __pyx_k_main[] = "main";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_open[] = "open";
 static const char __pyx_k_save[] = "save";
@@ -1250,27 +1268,36 @@ static const char __pyx_k_tam2[] = "tam2";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_TTYPE[] = "TTYPE";
 static const char __pyx_k_array[] = "array";
+static const char __pyx_k_c_lib[] = "c_lib";
 static const char __pyx_k_check[] = "check";
 static const char __pyx_k_close[] = "close";
 static const char __pyx_k_found[] = "found";
 static const char __pyx_k_index[] = "index";
+static const char __pyx_k_lista[] = "lista";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_print[] = "print";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_value[] = "value";
 static const char __pyx_k_append[] = "append";
+static const char __pyx_k_c_name[] = "c_name";
+static const char __pyx_k_ctypes[] = "ctypes";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_header[] = "header";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_ind_ar[] = "ind_ar";
 static const char __pyx_k_ind_dc[] = "ind_dc";
 static const char __pyx_k_j_list[] = "j_list";
+static const char __pyx_k_loaded[] = "loaded";
+static const char __pyx_k_main_2[] = "__main__";
 static const char __pyx_k_module[] = "module";
+static const char __pyx_k_read_c[] = "read_c";
 static const char __pyx_k_remove[] = "remove";
 static const char __pyx_k_result[] = "result";
 static const char __pyx_k_Load_2f[] = "Load: {:.2f}%";
 static const char __pyx_k_asarray[] = "asarray";
 static const char __pyx_k_element[] = "element";
+static const char __pyx_k_get_mag[] = "get_mag";
+static const char __pyx_k_loadtxt[] = "loadtxt";
 static const char __pyx_k_ndarray[] = "ndarray";
 static const char __pyx_k_replace[] = "replace";
 static const char __pyx_k_reshape[] = "reshape";
@@ -1280,45 +1307,69 @@ static const char __pyx_k_cat_open[] = "cat_open";
 static const char __pyx_k_elements[] = "elements";
 static const char __pyx_k_get_data[] = "get_data";
 static const char __pyx_k_get_info[] = "get_info";
+static const char __pyx_k_name_csv[] = "name_csv";
 static const char __pyx_k_new_data[] = "new_data";
+static const char __pyx_k_new_mags[] = "new_mags";
 static const char __pyx_k_ar_list_1[] = "ar_list_1";
 static const char __pyx_k_ar_list_2[] = "ar_list_2";
+static const char __pyx_k_catalog_1[] = "catalog_1";
+static const char __pyx_k_catalog_2[] = "catalog_2";
 static const char __pyx_k_dc_list_1[] = "dc_list_1";
 static const char __pyx_k_dc_list_2[] = "dc_list_2";
 static const char __pyx_k_delimiter[] = "delimiter";
+static const char __pyx_k_execute_c[] = "execute_c";
 static const char __pyx_k_ext_names[] = "ext_names";
 static const char __pyx_k_extension[] = "extension";
+static const char __pyx_k_saida_csv[] = "saida.csv";
+static const char __pyx_k_show_info[] = "show_info";
 static const char __pyx_k_threshold[] = "threshold";
 static const char __pyx_k_Header_txt[] = "Header.txt";
 static const char __pyx_k_astropy_io[] = "astropy.io";
+static const char __pyx_k_cat_name_1[] = "cat_name_1";
+static const char __pyx_k_cat_name_2[] = "cat_name_2";
 static const char __pyx_k_find_index[] = "find_index";
 static const char __pyx_k_get_header[] = "get_header";
 static const char __pyx_k_print_info[] = "print_info";
-static const char __pyx_k_ALPHA_J2000[] = "ALPHA_J2000";
-static const char __pyx_k_DELTA_J2000[] = "DELTA_J2000";
+static const char __pyx_k_LoadLibrary[] = "LoadLibrary";
 static const char __pyx_k_check_equal[] = "check_equal";
+static const char __pyx_k_entrada_csv[] = "entrada.csv";
+static const char __pyx_k_list_of_mag[] = "list_of_mag";
 static const char __pyx_k_str_element[] = "str_element";
 static const char __pyx_k_catalog_file[] = "catalog_file";
+static const char __pyx_k_save_all_obj[] = "save_all_obj";
 static const char __pyx_k_save_catalog[] = "save_catalog";
 static const char __pyx_k_equal_objects[] = "equal_objects";
+static const char __pyx_k_setup_catalog[] = "setup_catalog";
 static const char __pyx_k_manage_catalog[] = "manage_catalog";
 static const char __pyx_k_Extension___csv[] = "Extension{}_{}.csv";
 static const char __pyx_k_Save_Catalog_2f[] = "Save Catalog: {:.2f}%";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_manage_catalog_pyx[] = "manage_catalog.pyx";
+static const char __pyx_k_MAG_CAT_1_MAG_CAT_2[] = ", MAG_CAT_1, MAG_CAT_2";
+static const char __pyx_k_read_cross_match_csv[] = "read_cross_match_csv";
+static const char __pyx_k_save_cross_match_csv[] = "save_cross_match_csv";
+static const char __pyx_k_Magnitudes_compared_csv[] = "Magnitudes_compared.csv";
+static const char __pyx_k_Number_Number_1_Number_2[] = "Number, Number_1, Number_2, ";
 static const char __pyx_k_Number_of_founded_objects[] = "Number of founded objects:";
+static const char __pyx_k_Error_Catalogs_are_different[] = "Error: Catalogs are different.";
 static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_n_s_ALPHA_J2000;
-static PyObject *__pyx_n_s_DELTA_J2000;
+static PyObject *__pyx_kp_s_Error_Catalogs_are_different;
 static PyObject *__pyx_kp_s_Extension___csv;
 static PyObject *__pyx_kp_s_Header_txt;
+static PyObject *__pyx_n_s_LoadLibrary;
 static PyObject *__pyx_kp_s_Load_2f;
+static PyObject *__pyx_kp_s_MAG_CAT_1_MAG_CAT_2;
+static PyObject *__pyx_kp_s_Magnitudes_compared_csv;
+static PyObject *__pyx_kp_s_Number_Number_1_Number_2;
 static PyObject *__pyx_kp_s_Number_of_founded_objects;
 static PyObject *__pyx_kp_s_Save_Catalog_2f;
 static PyObject *__pyx_n_s_TTYPE;
 static PyObject *__pyx_kp_s__2;
 static PyObject *__pyx_kp_s__4;
 static PyObject *__pyx_kp_s__5;
+static PyObject *__pyx_kp_s__7;
+static PyObject *__pyx_kp_s__8;
+static PyObject *__pyx_kp_s__9;
 static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_ar;
 static PyObject *__pyx_n_s_ar_list_1;
@@ -1327,14 +1378,23 @@ static PyObject *__pyx_n_s_array;
 static PyObject *__pyx_n_s_asarray;
 static PyObject *__pyx_n_s_astropy_io;
 static PyObject *__pyx_n_s_best;
+static PyObject *__pyx_n_s_c_lib;
+static PyObject *__pyx_n_s_c_name;
 static PyObject *__pyx_n_s_cat_name;
+static PyObject *__pyx_n_s_cat_name_1;
+static PyObject *__pyx_n_s_cat_name_2;
 static PyObject *__pyx_n_s_cat_open;
+static PyObject *__pyx_n_s_catalog_1;
+static PyObject *__pyx_n_s_catalog_2;
 static PyObject *__pyx_n_s_catalog_file;
+static PyObject *__pyx_n_s_cdll;
 static PyObject *__pyx_n_s_check;
 static PyObject *__pyx_n_s_check_equal;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_close;
 static PyObject *__pyx_n_s_col;
+static PyObject *__pyx_n_s_ctypes;
+static PyObject *__pyx_kp_s_d;
 static PyObject *__pyx_n_s_data;
 static PyObject *__pyx_n_s_dc;
 static PyObject *__pyx_n_s_dc_list_1;
@@ -1344,7 +1404,9 @@ static PyObject *__pyx_n_s_dic;
 static PyObject *__pyx_n_s_element;
 static PyObject *__pyx_n_s_elements;
 static PyObject *__pyx_n_s_end;
+static PyObject *__pyx_kp_s_entrada_csv;
 static PyObject *__pyx_n_s_equal_objects;
+static PyObject *__pyx_n_s_execute_c;
 static PyObject *__pyx_n_s_ext_names;
 static PyObject *__pyx_n_s_extension;
 static PyObject *__pyx_n_s_file;
@@ -1356,9 +1418,12 @@ static PyObject *__pyx_n_s_found;
 static PyObject *__pyx_n_s_get_data;
 static PyObject *__pyx_n_s_get_header;
 static PyObject *__pyx_n_s_get_info;
+static PyObject *__pyx_n_s_get_mag;
+static PyObject *__pyx_n_s_head;
 static PyObject *__pyx_n_s_header;
 static PyObject *__pyx_n_s_i;
 static PyObject *__pyx_n_s_import;
+static PyObject *__pyx_n_s_ind;
 static PyObject *__pyx_n_s_ind_ar;
 static PyObject *__pyx_n_s_ind_dc;
 static PyObject *__pyx_n_s_index;
@@ -1367,30 +1432,47 @@ static PyObject *__pyx_n_s_j;
 static PyObject *__pyx_n_s_j_list;
 static PyObject *__pyx_n_s_k;
 static PyObject *__pyx_n_s_line;
+static PyObject *__pyx_n_s_list_of_mag;
+static PyObject *__pyx_n_s_lista;
+static PyObject *__pyx_n_s_loaded;
+static PyObject *__pyx_n_s_loadtxt;
 static PyObject *__pyx_n_s_m;
+static PyObject *__pyx_n_s_mag;
+static PyObject *__pyx_n_s_mags;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_main_2;
 static PyObject *__pyx_n_s_manage_catalog;
 static PyObject *__pyx_kp_s_manage_catalog_pyx;
 static PyObject *__pyx_n_s_min;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_n;
 static PyObject *__pyx_n_s_name;
+static PyObject *__pyx_n_s_name_csv;
 static PyObject *__pyx_n_s_ndarray;
 static PyObject *__pyx_n_s_new_data;
+static PyObject *__pyx_n_s_new_mags;
 static PyObject *__pyx_n_s_np;
 static PyObject *__pyx_n_s_numpy;
+static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_open;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_print_info;
 static PyObject *__pyx_n_s_range;
+static PyObject *__pyx_n_s_read_c;
+static PyObject *__pyx_n_s_read_cross_match_csv;
 static PyObject *__pyx_n_s_remove;
 static PyObject *__pyx_n_s_replace;
 static PyObject *__pyx_n_s_reshape;
 static PyObject *__pyx_n_s_result;
 static PyObject *__pyx_kp_s_s;
+static PyObject *__pyx_kp_s_saida_csv;
 static PyObject *__pyx_n_s_save;
+static PyObject *__pyx_n_s_save_all_obj;
 static PyObject *__pyx_n_s_save_catalog;
+static PyObject *__pyx_n_s_save_cross_match_csv;
 static PyObject *__pyx_n_s_savetxt;
+static PyObject *__pyx_n_s_setup_catalog;
+static PyObject *__pyx_n_s_show_info;
 static PyObject *__pyx_n_s_size;
 static PyObject *__pyx_n_s_sqrt;
 static PyObject *__pyx_n_s_str_element;
@@ -1407,34 +1489,57 @@ static PyObject *__pyx_pf_14manage_catalog_4get_data(CYTHON_UNUSED PyObject *__p
 static PyObject *__pyx_pf_14manage_catalog_6get_info(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_catalog_file, PyObject *__pyx_v_print_info); /* proto */
 static PyObject *__pyx_pf_14manage_catalog_8cat_open(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_cat_name); /* proto */
 static PyObject *__pyx_pf_14manage_catalog_10close(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_catalog_file); /* proto */
-static PyObject *__pyx_pf_14manage_catalog_12find_index(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_elements); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_12setup_catalog(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_cat_name_1, PyObject *__pyx_v_cat_name_2, PyObject *__pyx_v_show_info); /* proto */
 static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n, PyObject *__pyx_v_m, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_threshold, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_16find_index(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_ind_ar, PyObject *__pyx_v_ind_dc); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_18read_cross_match_csv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_name_csv); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_20save_cross_match_csv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list_of_mag, PyObject *__pyx_v_ar, PyObject *__pyx_v_dc); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_22save_all_obj(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_ind_ar, PyObject *__pyx_v_ind_dc); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_24execute_c(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c_name); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_26read_c(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_14manage_catalog_28get_mag(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_elements, PyObject *__pyx_v_mag, PyObject *__pyx_v_obj, PyObject *__pyx_v_ind_ar, PyObject *__pyx_v_ind_dc); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyList_Type_index = {0, &__pyx_n_s_index, 0, 0, 0};
 static __Pyx_CachedCFunction __pyx_umethod_PyList_Type_remove = {0, &__pyx_n_s_remove, 0, 0, 0};
+static PyObject *__pyx_float_0_;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_2;
 static PyObject *__pyx_int_3;
 static PyObject *__pyx_int_100;
 static PyObject *__pyx_int_3600;
+static PyObject *__pyx_int_neg_1;
 static PyObject *__pyx_slice__3;
 static PyObject *__pyx_tuple__6;
-static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_tuple__11;
-static PyObject *__pyx_tuple__13;
-static PyObject *__pyx_tuple__15;
-static PyObject *__pyx_tuple__17;
-static PyObject *__pyx_tuple__19;
-static PyObject *__pyx_tuple__21;
-static PyObject *__pyx_codeobj__8;
-static PyObject *__pyx_codeobj__10;
-static PyObject *__pyx_codeobj__12;
-static PyObject *__pyx_codeobj__14;
-static PyObject *__pyx_codeobj__16;
-static PyObject *__pyx_codeobj__18;
-static PyObject *__pyx_codeobj__20;
-static PyObject *__pyx_codeobj__22;
+static PyObject *__pyx_tuple__10;
+static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_tuple__14;
+static PyObject *__pyx_tuple__16;
+static PyObject *__pyx_tuple__18;
+static PyObject *__pyx_tuple__20;
+static PyObject *__pyx_tuple__22;
+static PyObject *__pyx_tuple__24;
+static PyObject *__pyx_tuple__26;
+static PyObject *__pyx_tuple__28;
+static PyObject *__pyx_tuple__30;
+static PyObject *__pyx_tuple__32;
+static PyObject *__pyx_tuple__34;
+static PyObject *__pyx_tuple__36;
+static PyObject *__pyx_tuple__38;
+static PyObject *__pyx_codeobj__11;
+static PyObject *__pyx_codeobj__13;
+static PyObject *__pyx_codeobj__15;
+static PyObject *__pyx_codeobj__17;
+static PyObject *__pyx_codeobj__19;
+static PyObject *__pyx_codeobj__21;
+static PyObject *__pyx_codeobj__23;
+static PyObject *__pyx_codeobj__25;
+static PyObject *__pyx_codeobj__27;
+static PyObject *__pyx_codeobj__29;
+static PyObject *__pyx_codeobj__31;
+static PyObject *__pyx_codeobj__33;
+static PyObject *__pyx_codeobj__35;
+static PyObject *__pyx_codeobj__37;
+static PyObject *__pyx_codeobj__39;
 /* Late includes */
 
 /* "manage_catalog.pyx":15
@@ -3056,30 +3161,34 @@ static PyObject *__pyx_pf_14manage_catalog_10close(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "manage_catalog.pyx":118
- * ######################################################################################
+/* "manage_catalog.pyx":119
  * 
- * def find_index(data, elements):             # <<<<<<<<<<<<<<
  * 
- *     ar = "ALPHA_J2000"
+ * def setup_catalog(cat_name_1, cat_name_2, show_info=False):             # <<<<<<<<<<<<<<
+ *     # Configure catalogs
+ *     catalog_1 = cat_open(cat_name_1)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14manage_catalog_13find_index(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_14manage_catalog_13find_index = {"find_index", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_14manage_catalog_13find_index, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_14manage_catalog_13find_index(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_data = 0;
-  PyObject *__pyx_v_elements = 0;
+static PyObject *__pyx_pw_14manage_catalog_13setup_catalog(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_13setup_catalog = {"setup_catalog", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_14manage_catalog_13setup_catalog, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14manage_catalog_13setup_catalog(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_cat_name_1 = 0;
+  PyObject *__pyx_v_cat_name_2 = 0;
+  PyObject *__pyx_v_show_info = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("find_index (wrapper)", 0);
+  __Pyx_RefNannySetupContext("setup_catalog (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_data,&__pyx_n_s_elements,0};
-    PyObject* values[2] = {0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_cat_name_1,&__pyx_n_s_cat_name_2,&__pyx_n_s_show_info,0};
+    PyObject* values[3] = {0,0,0};
+    values[2] = ((PyObject *)Py_False);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         CYTHON_FALLTHROUGH;
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -3090,146 +3199,78 @@ static PyObject *__pyx_pw_14manage_catalog_13find_index(PyObject *__pyx_self, Py
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_cat_name_1)) != 0)) kw_args--;
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_elements)) != 0)) kw_args--;
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_cat_name_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find_index", 1, 2, 2, 1); __PYX_ERR(0, 118, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("setup_catalog", 0, 2, 3, 1); __PYX_ERR(0, 119, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_show_info);
+          if (value) { values[2] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_index") < 0)) __PYX_ERR(0, 118, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "setup_catalog") < 0)) __PYX_ERR(0, 119, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
-    __pyx_v_data = values[0];
-    __pyx_v_elements = values[1];
+    __pyx_v_cat_name_1 = values[0];
+    __pyx_v_cat_name_2 = values[1];
+    __pyx_v_show_info = values[2];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_index", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 118, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setup_catalog", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 119, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("manage_catalog.find_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("manage_catalog.setup_catalog", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14manage_catalog_12find_index(__pyx_self, __pyx_v_data, __pyx_v_elements);
+  __pyx_r = __pyx_pf_14manage_catalog_12setup_catalog(__pyx_self, __pyx_v_cat_name_1, __pyx_v_cat_name_2, __pyx_v_show_info);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14manage_catalog_12find_index(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_elements) {
-  PyObject *__pyx_v_ar = NULL;
-  PyObject *__pyx_v_dc = NULL;
-  PyObject *__pyx_v_ind_ar = NULL;
-  PyObject *__pyx_v_ind_dc = NULL;
-  PyObject *__pyx_v_ar_list_1 = NULL;
-  PyObject *__pyx_v_dc_list_1 = NULL;
-  PyObject *__pyx_v_ar_list_2 = NULL;
-  PyObject *__pyx_v_dc_list_2 = NULL;
-  PyObject *__pyx_v_i = NULL;
-  PyObject *__pyx_v_equal_objects = NULL;
-  PyObject *__pyx_v_tam = NULL;
-  PyObject *__pyx_v_tam2 = NULL;
-  int __pyx_v_found;
-  PyObject *__pyx_v_x = NULL;
-  PyObject *__pyx_v_j_list = NULL;
-  PyObject *__pyx_v_j = NULL;
-  PyObject *__pyx_v_check = NULL;
-  PyObject *__pyx_v_result = NULL;
-  PyObject *__pyx_v_best = NULL;
+static PyObject *__pyx_pf_14manage_catalog_12setup_catalog(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_cat_name_1, PyObject *__pyx_v_cat_name_2, PyObject *__pyx_v_show_info) {
+  PyObject *__pyx_v_catalog_1 = NULL;
+  PyObject *__pyx_v_catalog_2 = NULL;
+  PyObject *__pyx_v_elements = NULL;
+  PyObject *__pyx_v_data = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  Py_ssize_t __pyx_t_4;
-  PyObject *(*__pyx_t_5)(PyObject *);
-  int __pyx_t_6;
-  Py_ssize_t __pyx_t_7;
-  PyObject *__pyx_t_8 = NULL;
-  PyObject *__pyx_t_9 = NULL;
-  PyObject *__pyx_t_10 = NULL;
-  PyObject *__pyx_t_11 = NULL;
-  PyObject *__pyx_t_12 = NULL;
-  PyObject *__pyx_t_13 = NULL;
-  int __pyx_t_14;
-  PyObject *__pyx_t_15 = NULL;
-  int __pyx_t_16;
-  __Pyx_RefNannySetupContext("find_index", 0);
-
-  /* "manage_catalog.pyx":120
- * def find_index(data, elements):
- * 
- *     ar = "ALPHA_J2000"             # <<<<<<<<<<<<<<
- *     dc = "DELTA_J2000"
- * 
- */
-  __Pyx_INCREF(__pyx_n_s_ALPHA_J2000);
-  __pyx_v_ar = __pyx_n_s_ALPHA_J2000;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  __Pyx_RefNannySetupContext("setup_catalog", 0);
 
   /* "manage_catalog.pyx":121
- * 
- *     ar = "ALPHA_J2000"
- *     dc = "DELTA_J2000"             # <<<<<<<<<<<<<<
- * 
- *     ind_ar = elements[0].index(ar)
- */
-  __Pyx_INCREF(__pyx_n_s_DELTA_J2000);
-  __pyx_v_dc = __pyx_n_s_DELTA_J2000;
-
-  /* "manage_catalog.pyx":123
- *     dc = "DELTA_J2000"
- * 
- *     ind_ar = elements[0].index(ar)             # <<<<<<<<<<<<<<
- *     ind_dc = elements[0].index(dc)
+ * def setup_catalog(cat_name_1, cat_name_2, show_info=False):
+ *     # Configure catalogs
+ *     catalog_1 = cat_open(cat_name_1)             # <<<<<<<<<<<<<<
+ *     catalog_2 = cat_open(cat_name_2)
  * 
  */
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_elements, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cat_open); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_ar) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_ar);
-  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_ind_ar = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "manage_catalog.pyx":124
- * 
- *     ind_ar = elements[0].index(ar)
- *     ind_dc = elements[0].index(dc)             # <<<<<<<<<<<<<<
- * 
- *     ar_list_1 = []
- */
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_elements, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_index); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
     __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_3)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
@@ -3238,888 +3279,356 @@ static PyObject *__pyx_pf_14manage_catalog_12find_index(CYTHON_UNUSED PyObject *
       __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_dc) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dc);
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_cat_name_1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_cat_name_1);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_ind_dc = __pyx_t_1;
+  __pyx_v_catalog_1 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "manage_catalog.pyx":126
- *     ind_dc = elements[0].index(dc)
+  /* "manage_catalog.pyx":122
+ *     # Configure catalogs
+ *     catalog_1 = cat_open(cat_name_1)
+ *     catalog_2 = cat_open(cat_name_2)             # <<<<<<<<<<<<<<
  * 
- *     ar_list_1 = []             # <<<<<<<<<<<<<<
- *     dc_list_1 = []
- *     ar_list_2 = []
+ *     # show info about catalogs
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cat_open); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_cat_name_2) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_cat_name_2);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_ar_list_1 = ((PyObject*)__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_catalog_2 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "manage_catalog.pyx":127
+  /* "manage_catalog.pyx":125
  * 
- *     ar_list_1 = []
- *     dc_list_1 = []             # <<<<<<<<<<<<<<
- *     ar_list_2 = []
- *     dc_list_2 = []
+ *     # show info about catalogs
+ *     if show_info:             # <<<<<<<<<<<<<<
+ *         print(get_info(catalog_1)[0])
+ *         print(get_info(catalog_2)[0])
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_dc_list_1 = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_show_info); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (__pyx_t_4) {
 
-  /* "manage_catalog.pyx":128
- *     ar_list_1 = []
- *     dc_list_1 = []
- *     ar_list_2 = []             # <<<<<<<<<<<<<<
- *     dc_list_2 = []
- *     for i in range(len(data[0])):
+    /* "manage_catalog.pyx":126
+ *     # show info about catalogs
+ *     if show_info:
+ *         print(get_info(catalog_1)[0])             # <<<<<<<<<<<<<<
+ *         print(get_info(catalog_2)[0])
+ * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_ar_list_2 = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_get_info); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+      if (likely(__pyx_t_3)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+        __Pyx_INCREF(__pyx_t_3);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_2, function);
+      }
+    }
+    __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_catalog_1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_catalog_1);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "manage_catalog.pyx":127
+ *     if show_info:
+ *         print(get_info(catalog_1)[0])
+ *         print(get_info(catalog_2)[0])             # <<<<<<<<<<<<<<
+ * 
+ *     elements = (get_header(catalog_1)[0], get_header(catalog_2)[0])
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_get_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_3)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_3);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+      }
+    }
+    __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_v_catalog_2) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_catalog_2);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":125
+ * 
+ *     # show info about catalogs
+ *     if show_info:             # <<<<<<<<<<<<<<
+ *         print(get_info(catalog_1)[0])
+ *         print(get_info(catalog_2)[0])
+ */
+  }
 
   /* "manage_catalog.pyx":129
- *     dc_list_1 = []
- *     ar_list_2 = []
- *     dc_list_2 = []             # <<<<<<<<<<<<<<
- *     for i in range(len(data[0])):
- *         ar_list_1.append(data[0][i][ind_ar])
+ *         print(get_info(catalog_2)[0])
+ * 
+ *     elements = (get_header(catalog_1)[0], get_header(catalog_2)[0])             # <<<<<<<<<<<<<<
+ *     # elements of catalog 1 and 2
+ * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_get_header); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_catalog_1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_catalog_1);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_dc_list_2 = ((PyObject*)__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_get_header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_v_catalog_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_catalog_2);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 0;
+  __pyx_v_elements = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "manage_catalog.pyx":130
- *     ar_list_2 = []
- *     dc_list_2 = []
- *     for i in range(len(data[0])):             # <<<<<<<<<<<<<<
- *         ar_list_1.append(data[0][i][ind_ar])
- *         dc_list_1.append(data[0][i][ind_dc])
- */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
-    __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_4 = 0;
-    __pyx_t_5 = NULL;
-  } else {
-    __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  for (;;) {
-    if (likely(!__pyx_t_5)) {
-      if (likely(PyList_CheckExact(__pyx_t_1))) {
-        if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_1)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 130, __pyx_L1_error)
-        #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_2);
-        #endif
-      } else {
-        if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 130, __pyx_L1_error)
-        #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_2);
-        #endif
-      }
-    } else {
-      __pyx_t_2 = __pyx_t_5(__pyx_t_1);
-      if (unlikely(!__pyx_t_2)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 130, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_2);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
-    __pyx_t_2 = 0;
-
-    /* "manage_catalog.pyx":131
- *     dc_list_2 = []
- *     for i in range(len(data[0])):
- *         ar_list_1.append(data[0][i][ind_ar])             # <<<<<<<<<<<<<<
- *         dc_list_1.append(data[0][i][ind_dc])
- *     for i in range(len(data[1])):
- */
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_ind_ar); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_ar_list_1, __pyx_t_2); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 131, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "manage_catalog.pyx":132
- *     for i in range(len(data[0])):
- *         ar_list_1.append(data[0][i][ind_ar])
- *         dc_list_1.append(data[0][i][ind_dc])             # <<<<<<<<<<<<<<
- *     for i in range(len(data[1])):
- *         ar_list_2.append(data[1][i][ind_ar])
- */
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_ind_dc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_dc_list_1, __pyx_t_2); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 132, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "manage_catalog.pyx":130
- *     ar_list_2 = []
- *     dc_list_2 = []
- *     for i in range(len(data[0])):             # <<<<<<<<<<<<<<
- *         ar_list_1.append(data[0][i][ind_ar])
- *         dc_list_1.append(data[0][i][ind_dc])
- */
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "manage_catalog.pyx":133
- *         ar_list_1.append(data[0][i][ind_ar])
- *         dc_list_1.append(data[0][i][ind_dc])
- *     for i in range(len(data[1])):             # <<<<<<<<<<<<<<
- *         ar_list_2.append(data[1][i][ind_ar])
- *         dc_list_2.append(data[1][i][ind_dc])
- */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 133, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
-    __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_4 = 0;
-    __pyx_t_5 = NULL;
-  } else {
-    __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 133, __pyx_L1_error)
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  for (;;) {
-    if (likely(!__pyx_t_5)) {
-      if (likely(PyList_CheckExact(__pyx_t_1))) {
-        if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_1)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 133, __pyx_L1_error)
-        #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_2);
-        #endif
-      } else {
-        if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 133, __pyx_L1_error)
-        #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_2);
-        #endif
-      }
-    } else {
-      __pyx_t_2 = __pyx_t_5(__pyx_t_1);
-      if (unlikely(!__pyx_t_2)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 133, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_2);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
-    __pyx_t_2 = 0;
-
-    /* "manage_catalog.pyx":134
- *         dc_list_1.append(data[0][i][ind_dc])
- *     for i in range(len(data[1])):
- *         ar_list_2.append(data[1][i][ind_ar])             # <<<<<<<<<<<<<<
- *         dc_list_2.append(data[1][i][ind_dc])
+  /* "manage_catalog.pyx":132
+ *     # elements of catalog 1 and 2
  * 
+ *     if elements[0] != elements[1]:             # <<<<<<<<<<<<<<
+ *         print("Error: Catalogs are different.")
+ *         return -1
  */
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_ind_ar); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_ar_list_2, __pyx_t_2); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 134, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "manage_catalog.pyx":135
- *     for i in range(len(data[1])):
- *         ar_list_2.append(data[1][i][ind_ar])
- *         dc_list_2.append(data[1][i][ind_dc])             # <<<<<<<<<<<<<<
- * 
- *     equal_objects = []
- */
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_ind_dc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_dc_list_2, __pyx_t_2); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 135, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_elements, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_elements, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_4) {
 
     /* "manage_catalog.pyx":133
- *         ar_list_1.append(data[0][i][ind_ar])
- *         dc_list_1.append(data[0][i][ind_dc])
- *     for i in range(len(data[1])):             # <<<<<<<<<<<<<<
- *         ar_list_2.append(data[1][i][ind_ar])
- *         dc_list_2.append(data[1][i][ind_dc])
+ * 
+ *     if elements[0] != elements[1]:
+ *         print("Error: Catalogs are different.")             # <<<<<<<<<<<<<<
+ *         return -1
+ * 
+ */
+    if (__Pyx_PrintOne(0, __pyx_kp_s_Error_Catalogs_are_different) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+
+    /* "manage_catalog.pyx":134
+ *     if elements[0] != elements[1]:
+ *         print("Error: Catalogs are different.")
+ *         return -1             # <<<<<<<<<<<<<<
+ * 
+ *     data = (get_data(catalog_1), get_data(catalog_2))  # data of catalogs
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(__pyx_int_neg_1);
+    __pyx_r = __pyx_int_neg_1;
+    goto __pyx_L0;
+
+    /* "manage_catalog.pyx":132
+ *     # elements of catalog 1 and 2
+ * 
+ *     if elements[0] != elements[1]:             # <<<<<<<<<<<<<<
+ *         print("Error: Catalogs are different.")
+ *         return -1
  */
   }
+
+  /* "manage_catalog.pyx":136
+ *         return -1
+ * 
+ *     data = (get_data(catalog_1), get_data(catalog_2))  # data of catalogs             # <<<<<<<<<<<<<<
+ *     close(catalog_1)
+ *     close(catalog_2)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_get_data); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_1)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_1, __pyx_v_catalog_1) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_catalog_1);
+  __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_get_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v_catalog_2) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_catalog_2);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 0;
+  __pyx_v_data = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
   /* "manage_catalog.pyx":137
- *         dc_list_2.append(data[1][i][ind_dc])
  * 
- *     equal_objects = []             # <<<<<<<<<<<<<<
- *     tam = len(data[0])
- *     tam2 = list(range(len(data[1])))
+ *     data = (get_data(catalog_1), get_data(catalog_2))  # data of catalogs
+ *     close(catalog_1)             # <<<<<<<<<<<<<<
+ *     close(catalog_2)
+ * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_catalog_1) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_catalog_1);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_equal_objects = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "manage_catalog.pyx":138
+ *     data = (get_data(catalog_1), get_data(catalog_2))  # data of catalogs
+ *     close(catalog_1)
+ *     close(catalog_2)             # <<<<<<<<<<<<<<
  * 
- *     equal_objects = []
- *     tam = len(data[0])             # <<<<<<<<<<<<<<
- *     tam2 = list(range(len(data[1])))
- *     for i in range(tam):
+ *     return data, elements
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_catalog_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_catalog_2);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_tam = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "manage_catalog.pyx":139
- *     equal_objects = []
- *     tam = len(data[0])
- *     tam2 = list(range(len(data[1])))             # <<<<<<<<<<<<<<
- *     for i in range(tam):
- *         found = False
- */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PySequence_List(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_tam2 = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
 
   /* "manage_catalog.pyx":140
- *     tam = len(data[0])
- *     tam2 = list(range(len(data[1])))
- *     for i in range(tam):             # <<<<<<<<<<<<<<
- *         found = False
- *         x = 0
- */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_v_tam); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
-    __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
-    __pyx_t_5 = NULL;
-  } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  for (;;) {
-    if (likely(!__pyx_t_5)) {
-      if (likely(PyList_CheckExact(__pyx_t_2))) {
-        if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 140, __pyx_L1_error)
-        #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_1);
-        #endif
-      } else {
-        if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 140, __pyx_L1_error)
-        #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_1);
-        #endif
-      }
-    } else {
-      __pyx_t_1 = __pyx_t_5(__pyx_t_2);
-      if (unlikely(!__pyx_t_1)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 140, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
-    __pyx_t_1 = 0;
-
-    /* "manage_catalog.pyx":141
- *     tam2 = list(range(len(data[1])))
- *     for i in range(tam):
- *         found = False             # <<<<<<<<<<<<<<
- *         x = 0
- *         j_list = []
- */
-    __pyx_v_found = 0;
-
-    /* "manage_catalog.pyx":142
- *     for i in range(tam):
- *         found = False
- *         x = 0             # <<<<<<<<<<<<<<
- *         j_list = []
- *         for j in tam2:
- */
-    __Pyx_INCREF(__pyx_int_0);
-    __Pyx_XDECREF_SET(__pyx_v_x, __pyx_int_0);
-
-    /* "manage_catalog.pyx":143
- *         found = False
- *         x = 0
- *         j_list = []             # <<<<<<<<<<<<<<
- *         for j in tam2:
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
- */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_XDECREF_SET(__pyx_v_j_list, ((PyObject*)__pyx_t_1));
-    __pyx_t_1 = 0;
-
-    /* "manage_catalog.pyx":144
- *         x = 0
- *         j_list = []
- *         for j in tam2:             # <<<<<<<<<<<<<<
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
- *             if check:
- */
-    __pyx_t_1 = __pyx_v_tam2; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
-    for (;;) {
-      if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
-      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_3); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 144, __pyx_L1_error)
-      #else
-      __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      #endif
-      __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_3);
-      __pyx_t_3 = 0;
-
-      /* "manage_catalog.pyx":145
- *         j_list = []
- *         for j in tam2:
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])             # <<<<<<<<<<<<<<
- *             if check:
- *                 j_list.append(j)
- */
-      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_check_equal); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 145, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_1, __pyx_v_i); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 145, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_1, __pyx_v_i); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 145, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_2, __pyx_v_j); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 145, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_2, __pyx_v_j); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 145, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = NULL;
-      __pyx_t_14 = 0;
-      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
-        __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_8);
-        if (likely(__pyx_t_13)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
-          __Pyx_INCREF(__pyx_t_13);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_8, function);
-          __pyx_t_14 = 1;
-        }
-      }
-      #if CYTHON_FAST_PYCALL
-      if (PyFunction_Check(__pyx_t_8)) {
-        PyObject *__pyx_temp[5] = {__pyx_t_13, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_14, 4+__pyx_t_14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      } else
-      #endif
-      #if CYTHON_FAST_PYCCALL
-      if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
-        PyObject *__pyx_temp[5] = {__pyx_t_13, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_14, 4+__pyx_t_14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      } else
-      #endif
-      {
-        __pyx_t_15 = PyTuple_New(4+__pyx_t_14); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 145, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_15);
-        if (__pyx_t_13) {
-          __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_13); __pyx_t_13 = NULL;
-        }
-        __Pyx_GIVEREF(__pyx_t_9);
-        PyTuple_SET_ITEM(__pyx_t_15, 0+__pyx_t_14, __pyx_t_9);
-        __Pyx_GIVEREF(__pyx_t_10);
-        PyTuple_SET_ITEM(__pyx_t_15, 1+__pyx_t_14, __pyx_t_10);
-        __Pyx_GIVEREF(__pyx_t_11);
-        PyTuple_SET_ITEM(__pyx_t_15, 2+__pyx_t_14, __pyx_t_11);
-        __Pyx_GIVEREF(__pyx_t_12);
-        PyTuple_SET_ITEM(__pyx_t_15, 3+__pyx_t_14, __pyx_t_12);
-        __pyx_t_9 = 0;
-        __pyx_t_10 = 0;
-        __pyx_t_11 = 0;
-        __pyx_t_12 = 0;
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-      }
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_XDECREF_SET(__pyx_v_check, __pyx_t_3);
-      __pyx_t_3 = 0;
-
-      /* "manage_catalog.pyx":146
- *         for j in tam2:
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
- *             if check:             # <<<<<<<<<<<<<<
- *                 j_list.append(j)
- *                 found = True
- */
-      __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_v_check); if (unlikely(__pyx_t_16 < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
-      if (__pyx_t_16) {
-
-        /* "manage_catalog.pyx":147
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
- *             if check:
- *                 j_list.append(j)             # <<<<<<<<<<<<<<
- *                 found = True
- *             if found:
- */
-        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_j_list, __pyx_v_j); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 147, __pyx_L1_error)
-
-        /* "manage_catalog.pyx":148
- *             if check:
- *                 j_list.append(j)
- *                 found = True             # <<<<<<<<<<<<<<
- *             if found:
- *                 x += 1
- */
-        __pyx_v_found = 1;
-
-        /* "manage_catalog.pyx":146
- *         for j in tam2:
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
- *             if check:             # <<<<<<<<<<<<<<
- *                 j_list.append(j)
- *                 found = True
- */
-      }
-
-      /* "manage_catalog.pyx":149
- *                 j_list.append(j)
- *                 found = True
- *             if found:             # <<<<<<<<<<<<<<
- *                 x += 1
- *                 if x >= 100:
- */
-      __pyx_t_16 = (__pyx_v_found != 0);
-      if (__pyx_t_16) {
-
-        /* "manage_catalog.pyx":150
- *                 found = True
- *             if found:
- *                 x += 1             # <<<<<<<<<<<<<<
- *                 if x >= 100:
- *                     break
- */
-        __pyx_t_3 = __Pyx_PyInt_AddObjC(__pyx_v_x, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_3);
-        __pyx_t_3 = 0;
-
-        /* "manage_catalog.pyx":151
- *             if found:
- *                 x += 1
- *                 if x >= 100:             # <<<<<<<<<<<<<<
- *                     break
- *         if found:
- */
-        __pyx_t_3 = PyObject_RichCompare(__pyx_v_x, __pyx_int_100, Py_GE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 151, __pyx_L1_error)
-        __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_16 < 0)) __PYX_ERR(0, 151, __pyx_L1_error)
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (__pyx_t_16) {
-
-          /* "manage_catalog.pyx":152
- *                 x += 1
- *                 if x >= 100:
- *                     break             # <<<<<<<<<<<<<<
- *         if found:
- *             result = []
- */
-          goto __pyx_L10_break;
-
-          /* "manage_catalog.pyx":151
- *             if found:
- *                 x += 1
- *                 if x >= 100:             # <<<<<<<<<<<<<<
- *                     break
- *         if found:
- */
-        }
-
-        /* "manage_catalog.pyx":149
- *                 j_list.append(j)
- *                 found = True
- *             if found:             # <<<<<<<<<<<<<<
- *                 x += 1
- *                 if x >= 100:
- */
-      }
-
-      /* "manage_catalog.pyx":144
- *         x = 0
- *         j_list = []
- *         for j in tam2:             # <<<<<<<<<<<<<<
- *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
- *             if check:
- */
-    }
-    __pyx_L10_break:;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "manage_catalog.pyx":153
- *                 if x >= 100:
- *                     break
- *         if found:             # <<<<<<<<<<<<<<
- *             result = []
- *             for j in j_list:
- */
-    __pyx_t_16 = (__pyx_v_found != 0);
-    if (__pyx_t_16) {
-
-      /* "manage_catalog.pyx":154
- *                     break
- *         if found:
- *             result = []             # <<<<<<<<<<<<<<
- *             for j in j_list:
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
- */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_XDECREF_SET(__pyx_v_result, ((PyObject*)__pyx_t_1));
-      __pyx_t_1 = 0;
-
-      /* "manage_catalog.pyx":155
- *         if found:
- *             result = []
- *             for j in j_list:             # <<<<<<<<<<<<<<
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
- *                                           value=True))
- */
-      __pyx_t_1 = __pyx_v_j_list; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
-      for (;;) {
-        if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_3); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
-        #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        #endif
-        __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_3);
-        __pyx_t_3 = 0;
-
-        /* "manage_catalog.pyx":156
- *             result = []
- *             for j in j_list:
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],             # <<<<<<<<<<<<<<
- *                                           value=True))
- *             best = j_list[result.index(min(result))]
- */
-        __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_check_equal); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_1, __pyx_v_i); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_15 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_1, __pyx_v_i); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_15);
-        __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_2, __pyx_v_j); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_2, __pyx_v_j); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_10 = PyTuple_New(4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_10);
-        __Pyx_GIVEREF(__pyx_t_8);
-        PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8);
-        __Pyx_GIVEREF(__pyx_t_15);
-        PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_15);
-        __Pyx_GIVEREF(__pyx_t_12);
-        PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_t_12);
-        __Pyx_GIVEREF(__pyx_t_11);
-        PyTuple_SET_ITEM(__pyx_t_10, 3, __pyx_t_11);
-        __pyx_t_8 = 0;
-        __pyx_t_15 = 0;
-        __pyx_t_12 = 0;
-        __pyx_t_11 = 0;
-
-        /* "manage_catalog.pyx":157
- *             for j in j_list:
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
- *                                           value=True))             # <<<<<<<<<<<<<<
- *             best = j_list[result.index(min(result))]
- *             equal_objects.append((i, best))
- */
-        __pyx_t_11 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 157, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_11);
-        if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_value, Py_True) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
-
-        /* "manage_catalog.pyx":156
- *             result = []
- *             for j in j_list:
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],             # <<<<<<<<<<<<<<
- *                                           value=True))
- *             best = j_list[result.index(min(result))]
- */
-        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_10, __pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_12);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_result, __pyx_t_12); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 156, __pyx_L1_error)
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-
-        /* "manage_catalog.pyx":155
- *         if found:
- *             result = []
- *             for j in j_list:             # <<<<<<<<<<<<<<
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
- *                                           value=True))
- */
-      }
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "manage_catalog.pyx":158
- *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
- *                                           value=True))
- *             best = j_list[result.index(min(result))]             # <<<<<<<<<<<<<<
- *             equal_objects.append((i, best))
- *             tam2.remove(best)
- */
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_min, __pyx_v_result); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_12 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyList_Type_index, __pyx_v_result, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_12);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_j_list, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __Pyx_XDECREF_SET(__pyx_v_best, __pyx_t_1);
-      __pyx_t_1 = 0;
-
-      /* "manage_catalog.pyx":159
- *                                           value=True))
- *             best = j_list[result.index(min(result))]
- *             equal_objects.append((i, best))             # <<<<<<<<<<<<<<
- *             tam2.remove(best)
- *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
- */
-      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_INCREF(__pyx_v_i);
-      __Pyx_GIVEREF(__pyx_v_i);
-      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_i);
-      __Pyx_INCREF(__pyx_v_best);
-      __Pyx_GIVEREF(__pyx_v_best);
-      PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_best);
-      __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_equal_objects, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 159, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "manage_catalog.pyx":160
- *             best = j_list[result.index(min(result))]
- *             equal_objects.append((i, best))
- *             tam2.remove(best)             # <<<<<<<<<<<<<<
- *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
- *     print(equal_objects)
- */
-      __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyList_Type_remove, __pyx_v_tam2, __pyx_v_best); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "manage_catalog.pyx":153
- *                 if x >= 100:
- *                     break
- *         if found:             # <<<<<<<<<<<<<<
- *             result = []
- *             for j in j_list:
- */
-    }
-
-    /* "manage_catalog.pyx":161
- *             equal_objects.append((i, best))
- *             tam2.remove(best)
- *         print("Load: {:.2f}%".format(((i+1)/tam)*100))             # <<<<<<<<<<<<<<
- *     print(equal_objects)
- *     print("Number of founded objects:", len(equal_objects))
- */
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Load_2f, __pyx_n_s_format); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_11 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_10 = __Pyx_PyNumber_Divide(__pyx_t_11, __pyx_v_tam); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = PyNumber_Multiply(__pyx_t_10, __pyx_int_100); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_11);
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_12))) {
-      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_12);
-      if (likely(__pyx_t_10)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_12);
-        __Pyx_INCREF(__pyx_t_10);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_12, function);
-      }
-    }
-    __pyx_t_1 = (__pyx_t_10) ? __Pyx_PyObject_Call2Args(__pyx_t_12, __pyx_t_10, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_11);
-    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "manage_catalog.pyx":140
- *     tam = len(data[0])
- *     tam2 = list(range(len(data[1])))
- *     for i in range(tam):             # <<<<<<<<<<<<<<
- *         found = False
- *         x = 0
- */
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "manage_catalog.pyx":162
- *             tam2.remove(best)
- *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
- *     print(equal_objects)             # <<<<<<<<<<<<<<
- *     print("Number of founded objects:", len(equal_objects))
+ *     close(catalog_2)
  * 
- */
-  if (__Pyx_PrintOne(0, __pyx_v_equal_objects) < 0) __PYX_ERR(0, 162, __pyx_L1_error)
-
-  /* "manage_catalog.pyx":163
- *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
- *     print(equal_objects)
- *     print("Number of founded objects:", len(equal_objects))             # <<<<<<<<<<<<<<
- * 
- *     return equal_objects, ar, ind_ar, dc, ind_dc
- */
-  __pyx_t_4 = PyList_GET_SIZE(__pyx_v_equal_objects); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 163, __pyx_L1_error)
-  __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_kp_s_Number_of_founded_objects);
-  __Pyx_GIVEREF(__pyx_kp_s_Number_of_founded_objects);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_s_Number_of_founded_objects);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
-  __pyx_t_2 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "manage_catalog.pyx":165
- *     print("Number of founded objects:", len(equal_objects))
- * 
- *     return equal_objects, ar, ind_ar, dc, ind_dc             # <<<<<<<<<<<<<<
+ *     return data, elements             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_v_equal_objects);
-  __Pyx_GIVEREF(__pyx_v_equal_objects);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_equal_objects);
-  __Pyx_INCREF(__pyx_v_ar);
-  __Pyx_GIVEREF(__pyx_v_ar);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_ar);
-  __Pyx_INCREF(__pyx_v_ind_ar);
-  __Pyx_GIVEREF(__pyx_v_ind_ar);
-  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_ind_ar);
-  __Pyx_INCREF(__pyx_v_dc);
-  __Pyx_GIVEREF(__pyx_v_dc);
-  PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_v_dc);
-  __Pyx_INCREF(__pyx_v_ind_dc);
-  __Pyx_GIVEREF(__pyx_v_ind_dc);
-  PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_v_ind_dc);
+  __Pyx_INCREF(__pyx_v_data);
+  __Pyx_GIVEREF(__pyx_v_data);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_data);
+  __Pyx_INCREF(__pyx_v_elements);
+  __Pyx_GIVEREF(__pyx_v_elements);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_elements);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "manage_catalog.pyx":118
- * ######################################################################################
+  /* "manage_catalog.pyx":119
  * 
- * def find_index(data, elements):             # <<<<<<<<<<<<<<
  * 
- *     ar = "ALPHA_J2000"
+ * def setup_catalog(cat_name_1, cat_name_2, show_info=False):             # <<<<<<<<<<<<<<
+ *     # Configure catalogs
+ *     catalog_1 = cat_open(cat_name_1)
  */
 
   /* function exit code */
@@ -4127,45 +3636,25 @@ static PyObject *__pyx_pf_14manage_catalog_12find_index(CYTHON_UNUSED PyObject *
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_XDECREF(__pyx_t_15);
-  __Pyx_AddTraceback("manage_catalog.find_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("manage_catalog.setup_catalog", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_ar);
-  __Pyx_XDECREF(__pyx_v_dc);
-  __Pyx_XDECREF(__pyx_v_ind_ar);
-  __Pyx_XDECREF(__pyx_v_ind_dc);
-  __Pyx_XDECREF(__pyx_v_ar_list_1);
-  __Pyx_XDECREF(__pyx_v_dc_list_1);
-  __Pyx_XDECREF(__pyx_v_ar_list_2);
-  __Pyx_XDECREF(__pyx_v_dc_list_2);
-  __Pyx_XDECREF(__pyx_v_i);
-  __Pyx_XDECREF(__pyx_v_equal_objects);
-  __Pyx_XDECREF(__pyx_v_tam);
-  __Pyx_XDECREF(__pyx_v_tam2);
-  __Pyx_XDECREF(__pyx_v_x);
-  __Pyx_XDECREF(__pyx_v_j_list);
-  __Pyx_XDECREF(__pyx_v_j);
-  __Pyx_XDECREF(__pyx_v_check);
-  __Pyx_XDECREF(__pyx_v_result);
-  __Pyx_XDECREF(__pyx_v_best);
+  __Pyx_XDECREF(__pyx_v_catalog_1);
+  __Pyx_XDECREF(__pyx_v_catalog_2);
+  __Pyx_XDECREF(__pyx_v_elements);
+  __Pyx_XDECREF(__pyx_v_data);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "manage_catalog.pyx":168
+/* "manage_catalog.pyx":146
  * 
  * 
  * def check_equal(n, m, x, y, threshold=3, value=False):             # <<<<<<<<<<<<<<
- *     # threshold in arcsecond
- *     # need to transform to degrees
+ *     # This function detects if one object, with AR and DEC (x and y), are inside a
+ *     # circle with radius "threshold" and center set by another object (n and m).
  */
 
 /* Python wrapper */
@@ -4214,19 +3703,19 @@ static PyObject *__pyx_pw_14manage_catalog_15check_equal(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_m)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, 1); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, 1); __PYX_ERR(0, 146, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, 2); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, 2); __PYX_ERR(0, 146, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, 3); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, 3); __PYX_ERR(0, 146, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
@@ -4242,7 +3731,7 @@ static PyObject *__pyx_pw_14manage_catalog_15check_equal(PyObject *__pyx_self, P
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "check_equal") < 0)) __PYX_ERR(0, 168, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "check_equal") < 0)) __PYX_ERR(0, 146, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4267,7 +3756,7 @@ static PyObject *__pyx_pw_14manage_catalog_15check_equal(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 168, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("check_equal", 0, 4, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 146, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("manage_catalog.check_equal", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4293,41 +3782,41 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
   __Pyx_RefNannySetupContext("check_equal", 0);
   __Pyx_INCREF(__pyx_v_threshold);
 
-  /* "manage_catalog.pyx":171
- *     # threshold in arcsecond
- *     # need to transform to degrees
+  /* "manage_catalog.pyx":153
+ *     # threshold in given in arcsecond
+ *     # it's needed to transform to degrees
  *     threshold = threshold / 60**2             # <<<<<<<<<<<<<<
  *     module = np.sqrt((n-x)**2 + (m-y)**2)
  * 
  */
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_v_threshold, __pyx_int_3600); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_v_threshold, __pyx_int_3600); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF_SET(__pyx_v_threshold, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "manage_catalog.pyx":172
- *     # need to transform to degrees
+  /* "manage_catalog.pyx":154
+ *     # it's needed to transform to degrees
  *     threshold = threshold / 60**2
  *     module = np.sqrt((n-x)**2 + (m-y)**2)             # <<<<<<<<<<<<<<
  * 
  *     if value:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_v_n, __pyx_v_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_v_n, __pyx_v_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_v_m, __pyx_v_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_v_m, __pyx_v_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyNumber_Power(__pyx_t_2, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_Power(__pyx_t_2, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4344,23 +3833,23 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_module = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "manage_catalog.pyx":174
+  /* "manage_catalog.pyx":156
  *     module = np.sqrt((n-x)**2 + (m-y)**2)
  * 
  *     if value:             # <<<<<<<<<<<<<<
  *         return module
  *     elif module <= threshold:
  */
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 156, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "manage_catalog.pyx":175
+    /* "manage_catalog.pyx":157
  * 
  *     if value:
  *         return module             # <<<<<<<<<<<<<<
@@ -4372,7 +3861,7 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
     __pyx_r = __pyx_v_module;
     goto __pyx_L0;
 
-    /* "manage_catalog.pyx":174
+    /* "manage_catalog.pyx":156
  *     module = np.sqrt((n-x)**2 + (m-y)**2)
  * 
  *     if value:             # <<<<<<<<<<<<<<
@@ -4381,19 +3870,19 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
  */
   }
 
-  /* "manage_catalog.pyx":176
+  /* "manage_catalog.pyx":158
  *     if value:
  *         return module
  *     elif module <= threshold:             # <<<<<<<<<<<<<<
  *         return True
  *     else:
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_module, __pyx_v_threshold, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_module, __pyx_v_threshold, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "manage_catalog.pyx":177
+    /* "manage_catalog.pyx":159
  *         return module
  *     elif module <= threshold:
  *         return True             # <<<<<<<<<<<<<<
@@ -4405,7 +3894,7 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
     __pyx_r = Py_True;
     goto __pyx_L0;
 
-    /* "manage_catalog.pyx":176
+    /* "manage_catalog.pyx":158
  *     if value:
  *         return module
  *     elif module <= threshold:             # <<<<<<<<<<<<<<
@@ -4414,10 +3903,12 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
  */
   }
 
-  /* "manage_catalog.pyx":179
+  /* "manage_catalog.pyx":161
  *         return True
  *     else:
  *         return False             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
@@ -4426,12 +3917,12 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
     goto __pyx_L0;
   }
 
-  /* "manage_catalog.pyx":168
+  /* "manage_catalog.pyx":146
  * 
  * 
  * def check_equal(n, m, x, y, threshold=3, value=False):             # <<<<<<<<<<<<<<
- *     # threshold in arcsecond
- *     # need to transform to degrees
+ *     # This function detects if one object, with AR and DEC (x and y), are inside a
+ *     # circle with radius "threshold" and center set by another object (n and m).
  */
 
   /* function exit code */
@@ -4446,6 +3937,2807 @@ static PyObject *__pyx_pf_14manage_catalog_14check_equal(CYTHON_UNUSED PyObject 
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_module);
   __Pyx_XDECREF(__pyx_v_threshold);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":167
+ * 
+ * 
+ * def find_index(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Detects which objects on two given catalogs (data) are the same object
+ *     # (CROSS-MATCH). Returns the indexes of the cross-matched objects.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_17find_index(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_17find_index = {"find_index", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_14manage_catalog_17find_index, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14manage_catalog_17find_index(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_data = 0;
+  PyObject *__pyx_v_ind_ar = 0;
+  PyObject *__pyx_v_ind_dc = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("find_index (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_data,&__pyx_n_s_ind_ar,&__pyx_n_s_ind_dc,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ind_ar)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("find_index", 1, 3, 3, 1); __PYX_ERR(0, 167, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ind_dc)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("find_index", 1, 3, 3, 2); __PYX_ERR(0, 167, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_index") < 0)) __PYX_ERR(0, 167, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_data = values[0];
+    __pyx_v_ind_ar = values[1];
+    __pyx_v_ind_dc = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("find_index", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 167, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("manage_catalog.find_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_14manage_catalog_16find_index(__pyx_self, __pyx_v_data, __pyx_v_ind_ar, __pyx_v_ind_dc);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_16find_index(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_ind_ar, PyObject *__pyx_v_ind_dc) {
+  PyObject *__pyx_v_ar_list_1 = NULL;
+  PyObject *__pyx_v_dc_list_1 = NULL;
+  PyObject *__pyx_v_ar_list_2 = NULL;
+  PyObject *__pyx_v_dc_list_2 = NULL;
+  PyObject *__pyx_v_i = NULL;
+  PyObject *__pyx_v_equal_objects = NULL;
+  PyObject *__pyx_v_tam = NULL;
+  PyObject *__pyx_v_tam2 = NULL;
+  int __pyx_v_found;
+  PyObject *__pyx_v_x = NULL;
+  PyObject *__pyx_v_j_list = NULL;
+  PyObject *__pyx_v_j = NULL;
+  PyObject *__pyx_v_check = NULL;
+  PyObject *__pyx_v_result = NULL;
+  PyObject *__pyx_v_best = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *(*__pyx_t_4)(PyObject *);
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_9 = NULL;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  PyObject *__pyx_t_12 = NULL;
+  PyObject *__pyx_t_13 = NULL;
+  int __pyx_t_14;
+  PyObject *__pyx_t_15 = NULL;
+  int __pyx_t_16;
+  __Pyx_RefNannySetupContext("find_index", 0);
+
+  /* "manage_catalog.pyx":171
+ *     # (CROSS-MATCH). Returns the indexes of the cross-matched objects.
+ * 
+ *     ar_list_1 = []             # <<<<<<<<<<<<<<
+ *     dc_list_1 = []
+ *     ar_list_2 = []
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ar_list_1 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":172
+ * 
+ *     ar_list_1 = []
+ *     dc_list_1 = []             # <<<<<<<<<<<<<<
+ *     ar_list_2 = []
+ *     dc_list_2 = []
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_dc_list_1 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":173
+ *     ar_list_1 = []
+ *     dc_list_1 = []
+ *     ar_list_2 = []             # <<<<<<<<<<<<<<
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ar_list_2 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":174
+ *     dc_list_1 = []
+ *     ar_list_2 = []
+ *     dc_list_2 = []             # <<<<<<<<<<<<<<
+ *     for i in range(len(data[0])):
+ *         ar_list_1.append(data[0][i][ind_ar])
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_dc_list_2 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":175
+ *     ar_list_2 = []
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):             # <<<<<<<<<<<<<<
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+    __pyx_t_1 = __pyx_t_3; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+    __pyx_t_4 = NULL;
+  } else {
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_4)) {
+      if (likely(PyList_CheckExact(__pyx_t_1))) {
+        if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 175, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      } else {
+        if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 175, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      }
+    } else {
+      __pyx_t_3 = __pyx_t_4(__pyx_t_1);
+      if (unlikely(!__pyx_t_3)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 175, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":176
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):
+ *         ar_list_1.append(data[0][i][ind_ar])             # <<<<<<<<<<<<<<
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):
+ */
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_ar); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_ar_list_1, __pyx_t_3); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 176, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":177
+ *     for i in range(len(data[0])):
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])             # <<<<<<<<<<<<<<
+ *     for i in range(len(data[1])):
+ *         ar_list_2.append(data[1][i][ind_ar])
+ */
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_dc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_dc_list_1, __pyx_t_3); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 177, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":175
+ *     ar_list_2 = []
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):             # <<<<<<<<<<<<<<
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":178
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):             # <<<<<<<<<<<<<<
+ *         ar_list_2.append(data[1][i][ind_ar])
+ *         dc_list_2.append(data[1][i][ind_dc])
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 178, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+    __pyx_t_1 = __pyx_t_3; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+    __pyx_t_4 = NULL;
+  } else {
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 178, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_4)) {
+      if (likely(PyList_CheckExact(__pyx_t_1))) {
+        if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      } else {
+        if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      }
+    } else {
+      __pyx_t_3 = __pyx_t_4(__pyx_t_1);
+      if (unlikely(!__pyx_t_3)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 178, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":179
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):
+ *         ar_list_2.append(data[1][i][ind_ar])             # <<<<<<<<<<<<<<
+ *         dc_list_2.append(data[1][i][ind_dc])
+ * 
+ */
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_ar); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_ar_list_2, __pyx_t_3); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 179, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":180
+ *     for i in range(len(data[1])):
+ *         ar_list_2.append(data[1][i][ind_ar])
+ *         dc_list_2.append(data[1][i][ind_dc])             # <<<<<<<<<<<<<<
+ * 
+ *     equal_objects = []
+ */
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_dc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_dc_list_2, __pyx_t_3); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 180, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":178
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):             # <<<<<<<<<<<<<<
+ *         ar_list_2.append(data[1][i][ind_ar])
+ *         dc_list_2.append(data[1][i][ind_dc])
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":182
+ *         dc_list_2.append(data[1][i][ind_dc])
+ * 
+ *     equal_objects = []             # <<<<<<<<<<<<<<
+ *     tam = len(data[0])
+ *     tam2 = list(range(len(data[1])))
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_equal_objects = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":183
+ * 
+ *     equal_objects = []
+ *     tam = len(data[0])             # <<<<<<<<<<<<<<
+ *     tam2 = list(range(len(data[1])))
+ *     for i in range(tam):
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_tam = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":184
+ *     equal_objects = []
+ *     tam = len(data[0])
+ *     tam2 = list(range(len(data[1])))             # <<<<<<<<<<<<<<
+ *     for i in range(tam):
+ *         found = False
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_tam2 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":185
+ *     tam = len(data[0])
+ *     tam2 = list(range(len(data[1])))
+ *     for i in range(tam):             # <<<<<<<<<<<<<<
+ *         found = False
+ *         x = 0
+ */
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_v_tam); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
+    __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3); __pyx_t_2 = 0;
+    __pyx_t_4 = NULL;
+  } else {
+    __pyx_t_2 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_4)) {
+      if (likely(PyList_CheckExact(__pyx_t_3))) {
+        if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_3)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 185, __pyx_L1_error)
+        #else
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        #endif
+      } else {
+        if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 185, __pyx_L1_error)
+        #else
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        #endif
+      }
+    } else {
+      __pyx_t_1 = __pyx_t_4(__pyx_t_3);
+      if (unlikely(!__pyx_t_1)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 185, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_1);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":186
+ *     tam2 = list(range(len(data[1])))
+ *     for i in range(tam):
+ *         found = False             # <<<<<<<<<<<<<<
+ *         x = 0
+ *         j_list = []
+ */
+    __pyx_v_found = 0;
+
+    /* "manage_catalog.pyx":187
+ *     for i in range(tam):
+ *         found = False
+ *         x = 0             # <<<<<<<<<<<<<<
+ *         j_list = []
+ *         for j in tam2:
+ */
+    __Pyx_INCREF(__pyx_int_0);
+    __Pyx_XDECREF_SET(__pyx_v_x, __pyx_int_0);
+
+    /* "manage_catalog.pyx":188
+ *         found = False
+ *         x = 0
+ *         j_list = []             # <<<<<<<<<<<<<<
+ *         for j in tam2:
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+ */
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v_j_list, ((PyObject*)__pyx_t_1));
+    __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":189
+ *         x = 0
+ *         j_list = []
+ *         for j in tam2:             # <<<<<<<<<<<<<<
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+ *             if check:
+ */
+    __pyx_t_1 = __pyx_v_tam2; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
+    for (;;) {
+      if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
+      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+      __pyx_t_5 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 189, __pyx_L1_error)
+      #else
+      __pyx_t_5 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 189, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      #endif
+      __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_5);
+      __pyx_t_5 = 0;
+
+      /* "manage_catalog.pyx":190
+ *         j_list = []
+ *         for j in tam2:
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])             # <<<<<<<<<<<<<<
+ *             if check:
+ *                 j_list.append(j)
+ */
+      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_check_equal); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_1, __pyx_v_i); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_1, __pyx_v_i); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_10);
+      __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_2, __pyx_v_j); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_2, __pyx_v_j); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_12);
+      __pyx_t_13 = NULL;
+      __pyx_t_14 = 0;
+      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
+        __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_8);
+        if (likely(__pyx_t_13)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+          __Pyx_INCREF(__pyx_t_13);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_8, function);
+          __pyx_t_14 = 1;
+        }
+      }
+      #if CYTHON_FAST_PYCALL
+      if (PyFunction_Check(__pyx_t_8)) {
+        PyObject *__pyx_temp[5] = {__pyx_t_13, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12};
+        __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_14, 4+__pyx_t_14); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+      } else
+      #endif
+      #if CYTHON_FAST_PYCCALL
+      if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
+        PyObject *__pyx_temp[5] = {__pyx_t_13, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12};
+        __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_14, 4+__pyx_t_14); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+      } else
+      #endif
+      {
+        __pyx_t_15 = PyTuple_New(4+__pyx_t_14); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 190, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_15);
+        if (__pyx_t_13) {
+          __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_13); __pyx_t_13 = NULL;
+        }
+        __Pyx_GIVEREF(__pyx_t_9);
+        PyTuple_SET_ITEM(__pyx_t_15, 0+__pyx_t_14, __pyx_t_9);
+        __Pyx_GIVEREF(__pyx_t_10);
+        PyTuple_SET_ITEM(__pyx_t_15, 1+__pyx_t_14, __pyx_t_10);
+        __Pyx_GIVEREF(__pyx_t_11);
+        PyTuple_SET_ITEM(__pyx_t_15, 2+__pyx_t_14, __pyx_t_11);
+        __Pyx_GIVEREF(__pyx_t_12);
+        PyTuple_SET_ITEM(__pyx_t_15, 3+__pyx_t_14, __pyx_t_12);
+        __pyx_t_9 = 0;
+        __pyx_t_10 = 0;
+        __pyx_t_11 = 0;
+        __pyx_t_12 = 0;
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_15, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+      }
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_check, __pyx_t_5);
+      __pyx_t_5 = 0;
+
+      /* "manage_catalog.pyx":191
+ *         for j in tam2:
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+ *             if check:             # <<<<<<<<<<<<<<
+ *                 j_list.append(j)
+ *                 found = True
+ */
+      __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_v_check); if (unlikely(__pyx_t_16 < 0)) __PYX_ERR(0, 191, __pyx_L1_error)
+      if (__pyx_t_16) {
+
+        /* "manage_catalog.pyx":192
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+ *             if check:
+ *                 j_list.append(j)             # <<<<<<<<<<<<<<
+ *                 found = True
+ *             if found:
+ */
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_j_list, __pyx_v_j); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 192, __pyx_L1_error)
+
+        /* "manage_catalog.pyx":193
+ *             if check:
+ *                 j_list.append(j)
+ *                 found = True             # <<<<<<<<<<<<<<
+ *             if found:
+ *                 x += 1
+ */
+        __pyx_v_found = 1;
+
+        /* "manage_catalog.pyx":191
+ *         for j in tam2:
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+ *             if check:             # <<<<<<<<<<<<<<
+ *                 j_list.append(j)
+ *                 found = True
+ */
+      }
+
+      /* "manage_catalog.pyx":194
+ *                 j_list.append(j)
+ *                 found = True
+ *             if found:             # <<<<<<<<<<<<<<
+ *                 x += 1
+ *                 if x >= 100:
+ */
+      __pyx_t_16 = (__pyx_v_found != 0);
+      if (__pyx_t_16) {
+
+        /* "manage_catalog.pyx":195
+ *                 found = True
+ *             if found:
+ *                 x += 1             # <<<<<<<<<<<<<<
+ *                 if x >= 100:
+ *                     break
+ */
+        __pyx_t_5 = __Pyx_PyInt_AddObjC(__pyx_v_x, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_5);
+        __pyx_t_5 = 0;
+
+        /* "manage_catalog.pyx":196
+ *             if found:
+ *                 x += 1
+ *                 if x >= 100:             # <<<<<<<<<<<<<<
+ *                     break
+ *         if found:
+ */
+        __pyx_t_5 = PyObject_RichCompare(__pyx_v_x, __pyx_int_100, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 196, __pyx_L1_error)
+        __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_16 < 0)) __PYX_ERR(0, 196, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        if (__pyx_t_16) {
+
+          /* "manage_catalog.pyx":197
+ *                 x += 1
+ *                 if x >= 100:
+ *                     break             # <<<<<<<<<<<<<<
+ *         if found:
+ *             result = []
+ */
+          goto __pyx_L10_break;
+
+          /* "manage_catalog.pyx":196
+ *             if found:
+ *                 x += 1
+ *                 if x >= 100:             # <<<<<<<<<<<<<<
+ *                     break
+ *         if found:
+ */
+        }
+
+        /* "manage_catalog.pyx":194
+ *                 j_list.append(j)
+ *                 found = True
+ *             if found:             # <<<<<<<<<<<<<<
+ *                 x += 1
+ *                 if x >= 100:
+ */
+      }
+
+      /* "manage_catalog.pyx":189
+ *         x = 0
+ *         j_list = []
+ *         for j in tam2:             # <<<<<<<<<<<<<<
+ *             check = check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j])
+ *             if check:
+ */
+    }
+    __pyx_L10_break:;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":198
+ *                 if x >= 100:
+ *                     break
+ *         if found:             # <<<<<<<<<<<<<<
+ *             result = []
+ *             for j in j_list:
+ */
+    __pyx_t_16 = (__pyx_v_found != 0);
+    if (__pyx_t_16) {
+
+      /* "manage_catalog.pyx":199
+ *                     break
+ *         if found:
+ *             result = []             # <<<<<<<<<<<<<<
+ *             for j in j_list:
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
+ */
+      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 199, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_XDECREF_SET(__pyx_v_result, ((PyObject*)__pyx_t_1));
+      __pyx_t_1 = 0;
+
+      /* "manage_catalog.pyx":200
+ *         if found:
+ *             result = []
+ *             for j in j_list:             # <<<<<<<<<<<<<<
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
+ *                                           value=True))
+ */
+      __pyx_t_1 = __pyx_v_j_list; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
+      for (;;) {
+        if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 200, __pyx_L1_error)
+        #else
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 200, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        #endif
+        __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_5);
+        __pyx_t_5 = 0;
+
+        /* "manage_catalog.pyx":201
+ *             result = []
+ *             for j in j_list:
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],             # <<<<<<<<<<<<<<
+ *                                           value=True))
+ *             best = j_list[result.index(min(result))]
+ */
+        __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_check_equal); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_1, __pyx_v_i); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __pyx_t_15 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_1, __pyx_v_i); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_15);
+        __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_v_ar_list_2, __pyx_v_j); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_12);
+        __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_v_dc_list_2, __pyx_v_j); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_10 = PyTuple_New(4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_10);
+        __Pyx_GIVEREF(__pyx_t_8);
+        PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8);
+        __Pyx_GIVEREF(__pyx_t_15);
+        PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_15);
+        __Pyx_GIVEREF(__pyx_t_12);
+        PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_t_12);
+        __Pyx_GIVEREF(__pyx_t_11);
+        PyTuple_SET_ITEM(__pyx_t_10, 3, __pyx_t_11);
+        __pyx_t_8 = 0;
+        __pyx_t_15 = 0;
+        __pyx_t_12 = 0;
+        __pyx_t_11 = 0;
+
+        /* "manage_catalog.pyx":202
+ *             for j in j_list:
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
+ *                                           value=True))             # <<<<<<<<<<<<<<
+ *             best = j_list[result.index(min(result))]
+ *             equal_objects.append((i, best))
+ */
+        __pyx_t_11 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 202, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_value, Py_True) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+
+        /* "manage_catalog.pyx":201
+ *             result = []
+ *             for j in j_list:
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],             # <<<<<<<<<<<<<<
+ *                                           value=True))
+ *             best = j_list[result.index(min(result))]
+ */
+        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, __pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_12);
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_result, __pyx_t_12); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 201, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+
+        /* "manage_catalog.pyx":200
+ *         if found:
+ *             result = []
+ *             for j in j_list:             # <<<<<<<<<<<<<<
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
+ *                                           value=True))
+ */
+      }
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+      /* "manage_catalog.pyx":203
+ *                 result.append(check_equal(ar_list_1[i], dc_list_1[i], ar_list_2[j], dc_list_2[j],
+ *                                           value=True))
+ *             best = j_list[result.index(min(result))]             # <<<<<<<<<<<<<<
+ *             equal_objects.append((i, best))
+ *             tam2.remove(best)
+ */
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_min, __pyx_v_result); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_12 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyList_Type_index, __pyx_v_result, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 203, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_12);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_j_list, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_best, __pyx_t_1);
+      __pyx_t_1 = 0;
+
+      /* "manage_catalog.pyx":204
+ *                                           value=True))
+ *             best = j_list[result.index(min(result))]
+ *             equal_objects.append((i, best))             # <<<<<<<<<<<<<<
+ *             tam2.remove(best)
+ *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
+ */
+      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_v_i);
+      __Pyx_GIVEREF(__pyx_v_i);
+      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_i);
+      __Pyx_INCREF(__pyx_v_best);
+      __Pyx_GIVEREF(__pyx_v_best);
+      PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_best);
+      __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_equal_objects, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 204, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+      /* "manage_catalog.pyx":205
+ *             best = j_list[result.index(min(result))]
+ *             equal_objects.append((i, best))
+ *             tam2.remove(best)             # <<<<<<<<<<<<<<
+ *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
+ *     print(equal_objects)
+ */
+      __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyList_Type_remove, __pyx_v_tam2, __pyx_v_best); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+      /* "manage_catalog.pyx":198
+ *                 if x >= 100:
+ *                     break
+ *         if found:             # <<<<<<<<<<<<<<
+ *             result = []
+ *             for j in j_list:
+ */
+    }
+
+    /* "manage_catalog.pyx":206
+ *             equal_objects.append((i, best))
+ *             tam2.remove(best)
+ *         print("Load: {:.2f}%".format(((i+1)/tam)*100))             # <<<<<<<<<<<<<<
+ *     print(equal_objects)
+ *     print("Number of founded objects:", len(equal_objects))
+ */
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Load_2f, __pyx_n_s_format); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_12);
+    __pyx_t_11 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __pyx_t_10 = __Pyx_PyNumber_Divide(__pyx_t_11, __pyx_v_tam); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __pyx_t_11 = PyNumber_Multiply(__pyx_t_10, __pyx_int_100); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __pyx_t_10 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_12))) {
+      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_12);
+      if (likely(__pyx_t_10)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_12);
+        __Pyx_INCREF(__pyx_t_10);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_12, function);
+      }
+    }
+    __pyx_t_1 = (__pyx_t_10) ? __Pyx_PyObject_Call2Args(__pyx_t_12, __pyx_t_10, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_11);
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":185
+ *     tam = len(data[0])
+ *     tam2 = list(range(len(data[1])))
+ *     for i in range(tam):             # <<<<<<<<<<<<<<
+ *         found = False
+ *         x = 0
+ */
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "manage_catalog.pyx":207
+ *             tam2.remove(best)
+ *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
+ *     print(equal_objects)             # <<<<<<<<<<<<<<
+ *     print("Number of founded objects:", len(equal_objects))
+ * 
+ */
+  if (__Pyx_PrintOne(0, __pyx_v_equal_objects) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":208
+ *         print("Load: {:.2f}%".format(((i+1)/tam)*100))
+ *     print(equal_objects)
+ *     print("Number of founded objects:", len(equal_objects))             # <<<<<<<<<<<<<<
+ * 
+ *     return equal_objects
+ */
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_equal_objects); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_kp_s_Number_of_founded_objects);
+  __Pyx_GIVEREF(__pyx_kp_s_Number_of_founded_objects);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_s_Number_of_founded_objects);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
+  __pyx_t_3 = 0;
+  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 208, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":210
+ *     print("Number of founded objects:", len(equal_objects))
+ * 
+ *     return equal_objects             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_equal_objects);
+  __pyx_r = __pyx_v_equal_objects;
+  goto __pyx_L0;
+
+  /* "manage_catalog.pyx":167
+ * 
+ * 
+ * def find_index(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Detects which objects on two given catalogs (data) are the same object
+ *     # (CROSS-MATCH). Returns the indexes of the cross-matched objects.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_12);
+  __Pyx_XDECREF(__pyx_t_13);
+  __Pyx_XDECREF(__pyx_t_15);
+  __Pyx_AddTraceback("manage_catalog.find_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_ar_list_1);
+  __Pyx_XDECREF(__pyx_v_dc_list_1);
+  __Pyx_XDECREF(__pyx_v_ar_list_2);
+  __Pyx_XDECREF(__pyx_v_dc_list_2);
+  __Pyx_XDECREF(__pyx_v_i);
+  __Pyx_XDECREF(__pyx_v_equal_objects);
+  __Pyx_XDECREF(__pyx_v_tam);
+  __Pyx_XDECREF(__pyx_v_tam2);
+  __Pyx_XDECREF(__pyx_v_x);
+  __Pyx_XDECREF(__pyx_v_j_list);
+  __Pyx_XDECREF(__pyx_v_j);
+  __Pyx_XDECREF(__pyx_v_check);
+  __Pyx_XDECREF(__pyx_v_result);
+  __Pyx_XDECREF(__pyx_v_best);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":216
+ * 
+ * 
+ * def read_cross_match_csv(name_csv):             # <<<<<<<<<<<<<<
+ *     # Read the csv file Magnitudes_compared.csv and returns the indexes of the
+ *     # cross-matched objects.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_19read_cross_match_csv(PyObject *__pyx_self, PyObject *__pyx_v_name_csv); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_19read_cross_match_csv = {"read_cross_match_csv", (PyCFunction)__pyx_pw_14manage_catalog_19read_cross_match_csv, METH_O, 0};
+static PyObject *__pyx_pw_14manage_catalog_19read_cross_match_csv(PyObject *__pyx_self, PyObject *__pyx_v_name_csv) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("read_cross_match_csv (wrapper)", 0);
+  __pyx_r = __pyx_pf_14manage_catalog_18read_cross_match_csv(__pyx_self, ((PyObject *)__pyx_v_name_csv));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_18read_cross_match_csv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_name_csv) {
+  PyObject *__pyx_v_loaded = NULL;
+  PyObject *__pyx_v_equal_objects = NULL;
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  __Pyx_RefNannySetupContext("read_cross_match_csv", 0);
+
+  /* "manage_catalog.pyx":220
+ *     # cross-matched objects.
+ * 
+ *     loaded = np.loadtxt(name_csv, delimiter=",")             # <<<<<<<<<<<<<<
+ * 
+ *     equal_objects = []
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_loadtxt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_v_name_csv);
+  __Pyx_GIVEREF(__pyx_v_name_csv);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_name_csv);
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_delimiter, __pyx_kp_s__4) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_loaded = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "manage_catalog.pyx":222
+ *     loaded = np.loadtxt(name_csv, delimiter=",")
+ * 
+ *     equal_objects = []             # <<<<<<<<<<<<<<
+ *     for i in range(len(loaded)):
+ *         equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))
+ */
+  __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_v_equal_objects = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "manage_catalog.pyx":223
+ * 
+ *     equal_objects = []
+ *     for i in range(len(loaded)):             # <<<<<<<<<<<<<<
+ *         equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))
+ * 
+ */
+  __pyx_t_5 = PyObject_Length(__pyx_v_loaded); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_6 = __pyx_t_5;
+  for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+    __pyx_v_i = __pyx_t_7;
+
+    /* "manage_catalog.pyx":224
+ *     equal_objects = []
+ *     for i in range(len(loaded)):
+ *         equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))             # <<<<<<<<<<<<<<
+ * 
+ *     return equal_objects
+ */
+    __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_loaded, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_4, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_t_3, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_loaded, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_3 = 0;
+    __pyx_t_1 = 0;
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_equal_objects, __pyx_t_4); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+
+  /* "manage_catalog.pyx":226
+ *         equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))
+ * 
+ *     return equal_objects             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_equal_objects);
+  __pyx_r = __pyx_v_equal_objects;
+  goto __pyx_L0;
+
+  /* "manage_catalog.pyx":216
+ * 
+ * 
+ * def read_cross_match_csv(name_csv):             # <<<<<<<<<<<<<<
+ *     # Read the csv file Magnitudes_compared.csv and returns the indexes of the
+ *     # cross-matched objects.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("manage_catalog.read_cross_match_csv", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_loaded);
+  __Pyx_XDECREF(__pyx_v_equal_objects);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":232
+ * 
+ * 
+ * def save_cross_match_csv(list_of_mag, ar, dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file that contain the cross-matched objects, their positional in sky
+ *     # and the two mags from both catalogs.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_21save_cross_match_csv(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_21save_cross_match_csv = {"save_cross_match_csv", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_14manage_catalog_21save_cross_match_csv, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14manage_catalog_21save_cross_match_csv(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_list_of_mag = 0;
+  PyObject *__pyx_v_ar = 0;
+  PyObject *__pyx_v_dc = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("save_cross_match_csv (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_list_of_mag,&__pyx_n_s_ar,&__pyx_n_s_dc,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_list_of_mag)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ar)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("save_cross_match_csv", 1, 3, 3, 1); __PYX_ERR(0, 232, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dc)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("save_cross_match_csv", 1, 3, 3, 2); __PYX_ERR(0, 232, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "save_cross_match_csv") < 0)) __PYX_ERR(0, 232, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_list_of_mag = values[0];
+    __pyx_v_ar = values[1];
+    __pyx_v_dc = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("save_cross_match_csv", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 232, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("manage_catalog.save_cross_match_csv", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_14manage_catalog_20save_cross_match_csv(__pyx_self, __pyx_v_list_of_mag, __pyx_v_ar, __pyx_v_dc);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_20save_cross_match_csv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list_of_mag, PyObject *__pyx_v_ar, PyObject *__pyx_v_dc) {
+  PyObject *__pyx_v_head = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  __Pyx_RefNannySetupContext("save_cross_match_csv", 0);
+
+  /* "manage_catalog.pyx":235
+ *     # Save a csv file that contain the cross-matched objects, their positional in sky
+ *     # and the two mags from both catalogs.
+ *     head = "Number, Number_1, Number_2, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"             # <<<<<<<<<<<<<<
+ *     np.savetxt("Magnitudes_compared.csv", list_of_mag, header=head, fmt="%s", delimiter=",")
+ * 
+ */
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Number_Number_1_Number_2, __pyx_v_ar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_v_dc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_MAG_CAT_1_MAG_CAT_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_head = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":236
+ *     # and the two mags from both catalogs.
+ *     head = "Number, Number_1, Number_2, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
+ *     np.savetxt("Magnitudes_compared.csv", list_of_mag, header=head, fmt="%s", delimiter=",")             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_savetxt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_kp_s_Magnitudes_compared_csv);
+  __Pyx_GIVEREF(__pyx_kp_s_Magnitudes_compared_csv);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_s_Magnitudes_compared_csv);
+  __Pyx_INCREF(__pyx_v_list_of_mag);
+  __Pyx_GIVEREF(__pyx_v_list_of_mag);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_list_of_mag);
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_header, __pyx_v_head) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fmt, __pyx_kp_s_s) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_delimiter, __pyx_kp_s__4) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "manage_catalog.pyx":232
+ * 
+ * 
+ * def save_cross_match_csv(list_of_mag, ar, dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file that contain the cross-matched objects, their positional in sky
+ *     # and the two mags from both catalogs.
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("manage_catalog.save_cross_match_csv", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_head);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":242
+ * 
+ * 
+ * def save_all_obj(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file to C code read and do the cross-match.
+ *     ar_list_1 = []
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_23save_all_obj(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_23save_all_obj = {"save_all_obj", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_14manage_catalog_23save_all_obj, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14manage_catalog_23save_all_obj(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_data = 0;
+  PyObject *__pyx_v_ind_ar = 0;
+  PyObject *__pyx_v_ind_dc = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("save_all_obj (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_data,&__pyx_n_s_ind_ar,&__pyx_n_s_ind_dc,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ind_ar)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("save_all_obj", 1, 3, 3, 1); __PYX_ERR(0, 242, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ind_dc)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("save_all_obj", 1, 3, 3, 2); __PYX_ERR(0, 242, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "save_all_obj") < 0)) __PYX_ERR(0, 242, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_data = values[0];
+    __pyx_v_ind_ar = values[1];
+    __pyx_v_ind_dc = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("save_all_obj", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 242, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("manage_catalog.save_all_obj", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_14manage_catalog_22save_all_obj(__pyx_self, __pyx_v_data, __pyx_v_ind_ar, __pyx_v_ind_dc);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_22save_all_obj(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_ind_ar, PyObject *__pyx_v_ind_dc) {
+  PyObject *__pyx_v_ar_list_1 = NULL;
+  PyObject *__pyx_v_dc_list_1 = NULL;
+  PyObject *__pyx_v_ar_list_2 = NULL;
+  PyObject *__pyx_v_dc_list_2 = NULL;
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_v_lista = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  Py_ssize_t __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_t_6;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  Py_ssize_t __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  __Pyx_RefNannySetupContext("save_all_obj", 0);
+
+  /* "manage_catalog.pyx":244
+ * def save_all_obj(data, ind_ar, ind_dc):
+ *     # Save a csv file to C code read and do the cross-match.
+ *     ar_list_1 = []             # <<<<<<<<<<<<<<
+ *     dc_list_1 = []
+ *     ar_list_2 = []
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ar_list_1 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":245
+ *     # Save a csv file to C code read and do the cross-match.
+ *     ar_list_1 = []
+ *     dc_list_1 = []             # <<<<<<<<<<<<<<
+ *     ar_list_2 = []
+ *     dc_list_2 = []
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_dc_list_1 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":246
+ *     ar_list_1 = []
+ *     dc_list_1 = []
+ *     ar_list_2 = []             # <<<<<<<<<<<<<<
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ar_list_2 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":247
+ *     dc_list_1 = []
+ *     ar_list_2 = []
+ *     dc_list_2 = []             # <<<<<<<<<<<<<<
+ *     for i in range(len(data[0])):
+ *         ar_list_1.append(data[0][i][ind_ar])
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_dc_list_2 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":248
+ *     ar_list_2 = []
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):             # <<<<<<<<<<<<<<
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 248, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_i = __pyx_t_4;
+
+    /* "manage_catalog.pyx":249
+ *     dc_list_2 = []
+ *     for i in range(len(data[0])):
+ *         ar_list_1.append(data[0][i][ind_ar])             # <<<<<<<<<<<<<<
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):
+ */
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_ar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_ar_list_1, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 249, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":250
+ *     for i in range(len(data[0])):
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])             # <<<<<<<<<<<<<<
+ *     for i in range(len(data[1])):
+ *         ar_list_2.append(data[1][i][ind_ar])
+ */
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 250, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_dc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_dc_list_1, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 250, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  }
+
+  /* "manage_catalog.pyx":251
+ *         ar_list_1.append(data[0][i][ind_ar])
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):             # <<<<<<<<<<<<<<
+ *         ar_list_2.append(data[1][i][ind_ar])
+ *         dc_list_2.append(data[1][i][ind_dc])
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_i = __pyx_t_4;
+
+    /* "manage_catalog.pyx":252
+ *         dc_list_1.append(data[0][i][ind_dc])
+ *     for i in range(len(data[1])):
+ *         ar_list_2.append(data[1][i][ind_ar])             # <<<<<<<<<<<<<<
+ *         dc_list_2.append(data[1][i][ind_dc])
+ * 
+ */
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_ar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_ar_list_2, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 252, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "manage_catalog.pyx":253
+ *     for i in range(len(data[1])):
+ *         ar_list_2.append(data[1][i][ind_ar])
+ *         dc_list_2.append(data[1][i][ind_dc])             # <<<<<<<<<<<<<<
+ * 
+ *     lista = [(len(data[0]), len(data[1]))]
+ */
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_ind_dc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_dc_list_2, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 253, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  }
+
+  /* "manage_catalog.pyx":255
+ *         dc_list_2.append(data[1][i][ind_dc])
+ * 
+ *     lista = [(len(data[0]), len(data[1]))]             # <<<<<<<<<<<<<<
+ * 
+ *     if len(data[0]) >= len(data[1]):
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_2 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_5);
+  PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_5);
+  __pyx_t_1 = 0;
+  __pyx_t_5 = 0;
+  __pyx_t_5 = PyList_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_7);
+  PyList_SET_ITEM(__pyx_t_5, 0, __pyx_t_7);
+  __pyx_t_7 = 0;
+  __pyx_v_lista = ((PyObject*)__pyx_t_5);
+  __pyx_t_5 = 0;
+
+  /* "manage_catalog.pyx":257
+ *     lista = [(len(data[0]), len(data[1]))]
+ * 
+ *     if len(data[0]) >= len(data[1]):             # <<<<<<<<<<<<<<
+ *         for i in range(len(data[0])):
+ *             if i < len(data[1]):
+ */
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_2 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 257, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_3 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 257, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_8 = ((__pyx_t_2 >= __pyx_t_3) != 0);
+  if (__pyx_t_8) {
+
+    /* "manage_catalog.pyx":258
+ * 
+ *     if len(data[0]) >= len(data[1]):
+ *         for i in range(len(data[0])):             # <<<<<<<<<<<<<<
+ *             if i < len(data[1]):
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ */
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_3 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 258, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_2 = __pyx_t_3;
+    for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_2; __pyx_t_4+=1) {
+      __pyx_v_i = __pyx_t_4;
+
+      /* "manage_catalog.pyx":259
+ *     if len(data[0]) >= len(data[1]):
+ *         for i in range(len(data[0])):
+ *             if i < len(data[1]):             # <<<<<<<<<<<<<<
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ *             else:
+ */
+      __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_9 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 259, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_8 = ((__pyx_v_i < __pyx_t_9) != 0);
+      if (__pyx_t_8) {
+
+        /* "manage_catalog.pyx":260
+ *         for i in range(len(data[0])):
+ *             if i < len(data[1]):
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))             # <<<<<<<<<<<<<<
+ *             else:
+ *                 lista.append((ar_list_1[i], dc_list_1[i], 0., 0.))
+ */
+        __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_ar_list_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __pyx_t_7 = __Pyx_GetItemInt_List(__pyx_v_dc_list_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 260, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_ar_list_2, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_10 = __Pyx_GetItemInt_List(__pyx_v_dc_list_2, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 260, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_10);
+        __pyx_t_11 = PyTuple_New(4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 260, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        __Pyx_GIVEREF(__pyx_t_5);
+        PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5);
+        __Pyx_GIVEREF(__pyx_t_7);
+        PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_7);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_10);
+        PyTuple_SET_ITEM(__pyx_t_11, 3, __pyx_t_10);
+        __pyx_t_5 = 0;
+        __pyx_t_7 = 0;
+        __pyx_t_1 = 0;
+        __pyx_t_10 = 0;
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_lista, __pyx_t_11); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 260, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+
+        /* "manage_catalog.pyx":259
+ *     if len(data[0]) >= len(data[1]):
+ *         for i in range(len(data[0])):
+ *             if i < len(data[1]):             # <<<<<<<<<<<<<<
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ *             else:
+ */
+        goto __pyx_L10;
+      }
+
+      /* "manage_catalog.pyx":262
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ *             else:
+ *                 lista.append((ar_list_1[i], dc_list_1[i], 0., 0.))             # <<<<<<<<<<<<<<
+ *     else:
+ *         for i in range(len(data[1])):
+ */
+      /*else*/ {
+        __pyx_t_11 = __Pyx_GetItemInt_List(__pyx_v_ar_list_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 262, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_10 = __Pyx_GetItemInt_List(__pyx_v_dc_list_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 262, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_10);
+        __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 262, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_11);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_11);
+        __Pyx_GIVEREF(__pyx_t_10);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_10);
+        __Pyx_INCREF(__pyx_float_0_);
+        __Pyx_GIVEREF(__pyx_float_0_);
+        PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_float_0_);
+        __Pyx_INCREF(__pyx_float_0_);
+        __Pyx_GIVEREF(__pyx_float_0_);
+        PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_float_0_);
+        __pyx_t_11 = 0;
+        __pyx_t_10 = 0;
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_lista, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 262, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      }
+      __pyx_L10:;
+    }
+
+    /* "manage_catalog.pyx":257
+ *     lista = [(len(data[0]), len(data[1]))]
+ * 
+ *     if len(data[0]) >= len(data[1]):             # <<<<<<<<<<<<<<
+ *         for i in range(len(data[0])):
+ *             if i < len(data[1]):
+ */
+    goto __pyx_L7;
+  }
+
+  /* "manage_catalog.pyx":264
+ *                 lista.append((ar_list_1[i], dc_list_1[i], 0., 0.))
+ *     else:
+ *         for i in range(len(data[1])):             # <<<<<<<<<<<<<<
+ *             if i < len(data[0]):
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ */
+  /*else*/ {
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 264, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 264, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_2 = __pyx_t_3;
+    for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_2; __pyx_t_4+=1) {
+      __pyx_v_i = __pyx_t_4;
+
+      /* "manage_catalog.pyx":265
+ *     else:
+ *         for i in range(len(data[1])):
+ *             if i < len(data[0]):             # <<<<<<<<<<<<<<
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ *             else:
+ */
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_9 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 265, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_8 = ((__pyx_v_i < __pyx_t_9) != 0);
+      if (__pyx_t_8) {
+
+        /* "manage_catalog.pyx":266
+ *         for i in range(len(data[1])):
+ *             if i < len(data[0]):
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))             # <<<<<<<<<<<<<<
+ *             else:
+ *                 lista.append((0., 0., ar_list_2[i], dc_list_2[i]))
+ */
+        __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_ar_list_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_10 = __Pyx_GetItemInt_List(__pyx_v_dc_list_1, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 266, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_10);
+        __pyx_t_11 = __Pyx_GetItemInt_List(__pyx_v_ar_list_2, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 266, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_7 = __Pyx_GetItemInt_List(__pyx_v_dc_list_2, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 266, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 266, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_10);
+        PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_10);
+        __Pyx_GIVEREF(__pyx_t_11);
+        PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_t_11);
+        __Pyx_GIVEREF(__pyx_t_7);
+        PyTuple_SET_ITEM(__pyx_t_5, 3, __pyx_t_7);
+        __pyx_t_1 = 0;
+        __pyx_t_10 = 0;
+        __pyx_t_11 = 0;
+        __pyx_t_7 = 0;
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_lista, __pyx_t_5); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 266, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+        /* "manage_catalog.pyx":265
+ *     else:
+ *         for i in range(len(data[1])):
+ *             if i < len(data[0]):             # <<<<<<<<<<<<<<
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ *             else:
+ */
+        goto __pyx_L13;
+      }
+
+      /* "manage_catalog.pyx":268
+ *                 lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+ *             else:
+ *                 lista.append((0., 0., ar_list_2[i], dc_list_2[i]))             # <<<<<<<<<<<<<<
+ * 
+ *     np.savetxt("entrada.csv", lista, fmt="%s", delimiter=";")
+ */
+      /*else*/ {
+        __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_ar_list_2, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 268, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __pyx_t_7 = __Pyx_GetItemInt_List(__pyx_v_dc_list_2, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 268, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __pyx_t_11 = PyTuple_New(4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 268, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        __Pyx_INCREF(__pyx_float_0_);
+        __Pyx_GIVEREF(__pyx_float_0_);
+        PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_float_0_);
+        __Pyx_INCREF(__pyx_float_0_);
+        __Pyx_GIVEREF(__pyx_float_0_);
+        PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_float_0_);
+        __Pyx_GIVEREF(__pyx_t_5);
+        PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_t_5);
+        __Pyx_GIVEREF(__pyx_t_7);
+        PyTuple_SET_ITEM(__pyx_t_11, 3, __pyx_t_7);
+        __pyx_t_5 = 0;
+        __pyx_t_7 = 0;
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_lista, __pyx_t_11); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 268, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      }
+      __pyx_L13:;
+    }
+  }
+  __pyx_L7:;
+
+  /* "manage_catalog.pyx":270
+ *                 lista.append((0., 0., ar_list_2[i], dc_list_2[i]))
+ * 
+ *     np.savetxt("entrada.csv", lista, fmt="%s", delimiter=";")             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_np); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_savetxt); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_INCREF(__pyx_kp_s_entrada_csv);
+  __Pyx_GIVEREF(__pyx_kp_s_entrada_csv);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_kp_s_entrada_csv);
+  __Pyx_INCREF(__pyx_v_lista);
+  __Pyx_GIVEREF(__pyx_v_lista);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_v_lista);
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fmt, __pyx_kp_s_s) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_delimiter, __pyx_kp_s__8) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_11, __pyx_t_5); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_10);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+
+  /* "manage_catalog.pyx":242
+ * 
+ * 
+ * def save_all_obj(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file to C code read and do the cross-match.
+ *     ar_list_1 = []
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_AddTraceback("manage_catalog.save_all_obj", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_ar_list_1);
+  __Pyx_XDECREF(__pyx_v_dc_list_1);
+  __Pyx_XDECREF(__pyx_v_ar_list_2);
+  __Pyx_XDECREF(__pyx_v_dc_list_2);
+  __Pyx_XDECREF(__pyx_v_lista);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":276
+ * 
+ * 
+ * def execute_c(c_name):             # <<<<<<<<<<<<<<
+ *     # Execute the function py_script from a C code with the name c_name.
+ *     import ctypes
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_25execute_c(PyObject *__pyx_self, PyObject *__pyx_v_c_name); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_25execute_c = {"execute_c", (PyCFunction)__pyx_pw_14manage_catalog_25execute_c, METH_O, 0};
+static PyObject *__pyx_pw_14manage_catalog_25execute_c(PyObject *__pyx_self, PyObject *__pyx_v_c_name) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("execute_c (wrapper)", 0);
+  __pyx_r = __pyx_pf_14manage_catalog_24execute_c(__pyx_self, ((PyObject *)__pyx_v_c_name));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_24execute_c(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c_name) {
+  PyObject *__pyx_v_ctypes = NULL;
+  PyObject *__pyx_v_c_lib = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  __Pyx_RefNannySetupContext("execute_c", 0);
+
+  /* "manage_catalog.pyx":278
+ * def execute_c(c_name):
+ *     # Execute the function py_script from a C code with the name c_name.
+ *     import ctypes             # <<<<<<<<<<<<<<
+ * 
+ *     c_lib = ctypes.cdll.LoadLibrary("./{}".format(c_name))
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_ctypes, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 278, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ctypes = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":280
+ *     import ctypes
+ * 
+ *     c_lib = ctypes.cdll.LoadLibrary("./{}".format(c_name))             # <<<<<<<<<<<<<<
+ *     # c_lib.py_script()
+ *     c_lib.main()
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_ctypes, __pyx_n_s_cdll); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_LoadLibrary); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s__9, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+    }
+  }
+  __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_c_name) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_c_name);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_c_lib = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":282
+ *     c_lib = ctypes.cdll.LoadLibrary("./{}".format(c_name))
+ *     # c_lib.py_script()
+ *     c_lib.main()             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_c_lib, __pyx_n_s_main); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":276
+ * 
+ * 
+ * def execute_c(c_name):             # <<<<<<<<<<<<<<
+ *     # Execute the function py_script from a C code with the name c_name.
+ *     import ctypes
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("manage_catalog.execute_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_ctypes);
+  __Pyx_XDECREF(__pyx_v_c_lib);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":288
+ * 
+ * 
+ * def read_c():             # <<<<<<<<<<<<<<
+ *     # Read the output csv file generated by the C code and returns the indexes of the
+ *     # cross-matched objects.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_27read_c(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_27read_c = {"read_c", (PyCFunction)__pyx_pw_14manage_catalog_27read_c, METH_NOARGS, 0};
+static PyObject *__pyx_pw_14manage_catalog_27read_c(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("read_c (wrapper)", 0);
+  __pyx_r = __pyx_pf_14manage_catalog_26read_c(__pyx_self);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_26read_c(CYTHON_UNUSED PyObject *__pyx_self) {
+  PyObject *__pyx_v_name_csv = NULL;
+  PyObject *__pyx_v_loaded = NULL;
+  PyObject *__pyx_v_equal_objects = NULL;
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  __Pyx_RefNannySetupContext("read_c", 0);
+
+  /* "manage_catalog.pyx":291
+ *     # Read the output csv file generated by the C code and returns the indexes of the
+ *     # cross-matched objects.
+ *     name_csv = "saida.csv"             # <<<<<<<<<<<<<<
+ * 
+ *     loaded = np.loadtxt(name_csv, delimiter=",")
+ */
+  __Pyx_INCREF(__pyx_kp_s_saida_csv);
+  __pyx_v_name_csv = __pyx_kp_s_saida_csv;
+
+  /* "manage_catalog.pyx":293
+ *     name_csv = "saida.csv"
+ * 
+ *     loaded = np.loadtxt(name_csv, delimiter=",")             # <<<<<<<<<<<<<<
+ * 
+ *     equal_objects = []
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_loadtxt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_v_name_csv);
+  __Pyx_GIVEREF(__pyx_v_name_csv);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_name_csv);
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_delimiter, __pyx_kp_s__4) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_loaded = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "manage_catalog.pyx":295
+ *     loaded = np.loadtxt(name_csv, delimiter=",")
+ * 
+ *     equal_objects = []             # <<<<<<<<<<<<<<
+ *     for i in range(len(loaded)):
+ *         equal_objects.append((int(loaded[i][0] - 1), int(loaded[i][1] - 1)))
+ */
+  __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 295, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_v_equal_objects = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "manage_catalog.pyx":296
+ * 
+ *     equal_objects = []
+ *     for i in range(len(loaded)):             # <<<<<<<<<<<<<<
+ *         equal_objects.append((int(loaded[i][0] - 1), int(loaded[i][1] - 1)))
+ * 
+ */
+  __pyx_t_5 = PyObject_Length(__pyx_v_loaded); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_t_6 = __pyx_t_5;
+  for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+    __pyx_v_i = __pyx_t_7;
+
+    /* "manage_catalog.pyx":297
+ *     equal_objects = []
+ *     for i in range(len(loaded)):
+ *         equal_objects.append((int(loaded[i][0] - 1), int(loaded[i][1] - 1)))             # <<<<<<<<<<<<<<
+ * 
+ *     return equal_objects
+ */
+    __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_loaded, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_4, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_t_3, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_loaded, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_3 = 0;
+    __pyx_t_1 = 0;
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_equal_objects, __pyx_t_4); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+
+  /* "manage_catalog.pyx":299
+ *         equal_objects.append((int(loaded[i][0] - 1), int(loaded[i][1] - 1)))
+ * 
+ *     return equal_objects             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_equal_objects);
+  __pyx_r = __pyx_v_equal_objects;
+  goto __pyx_L0;
+
+  /* "manage_catalog.pyx":288
+ * 
+ * 
+ * def read_c():             # <<<<<<<<<<<<<<
+ *     # Read the output csv file generated by the C code and returns the indexes of the
+ *     # cross-matched objects.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("manage_catalog.read_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_name_csv);
+  __Pyx_XDECREF(__pyx_v_loaded);
+  __Pyx_XDECREF(__pyx_v_equal_objects);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "manage_catalog.pyx":305
+ * 
+ * 
+ * def get_mag(data, elements, mag, obj, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Get the magnitudes of the cross-matched objects and return two lists:
+ *     # The first one has only the two mags from both catalogs;
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14manage_catalog_29get_mag(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_14manage_catalog_29get_mag = {"get_mag", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_14manage_catalog_29get_mag, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14manage_catalog_29get_mag(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_data = 0;
+  PyObject *__pyx_v_elements = 0;
+  PyObject *__pyx_v_mag = 0;
+  PyObject *__pyx_v_obj = 0;
+  PyObject *__pyx_v_ind_ar = 0;
+  PyObject *__pyx_v_ind_dc = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_mag (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_data,&__pyx_n_s_elements,&__pyx_n_s_mag,&__pyx_n_s_obj,&__pyx_n_s_ind_ar,&__pyx_n_s_ind_dc,0};
+    PyObject* values[6] = {0,0,0,0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
+        CYTHON_FALLTHROUGH;
+        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+        CYTHON_FALLTHROUGH;
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_elements)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_mag", 1, 6, 6, 1); __PYX_ERR(0, 305, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mag)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_mag", 1, 6, 6, 2); __PYX_ERR(0, 305, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_obj)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_mag", 1, 6, 6, 3); __PYX_ERR(0, 305, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  4:
+        if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ind_ar)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_mag", 1, 6, 6, 4); __PYX_ERR(0, 305, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  5:
+        if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ind_dc)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_mag", 1, 6, 6, 5); __PYX_ERR(0, 305, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_mag") < 0)) __PYX_ERR(0, 305, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+      values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+      values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
+    }
+    __pyx_v_data = values[0];
+    __pyx_v_elements = values[1];
+    __pyx_v_mag = values[2];
+    __pyx_v_obj = values[3];
+    __pyx_v_ind_ar = values[4];
+    __pyx_v_ind_dc = values[5];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("get_mag", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 305, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("manage_catalog.get_mag", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_14manage_catalog_28get_mag(__pyx_self, __pyx_v_data, __pyx_v_elements, __pyx_v_mag, __pyx_v_obj, __pyx_v_ind_ar, __pyx_v_ind_dc);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14manage_catalog_28get_mag(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_elements, PyObject *__pyx_v_mag, PyObject *__pyx_v_obj, PyObject *__pyx_v_ind_ar, PyObject *__pyx_v_ind_dc) {
+  PyObject *__pyx_v_ind = NULL;
+  PyObject *__pyx_v_mags = NULL;
+  PyObject *__pyx_v_i = NULL;
+  PyObject *__pyx_v_new_mags = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  Py_ssize_t __pyx_t_4;
+  PyObject *(*__pyx_t_5)(PyObject *);
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  PyObject *__pyx_t_12 = NULL;
+  __Pyx_RefNannySetupContext("get_mag", 0);
+
+  /* "manage_catalog.pyx":310
+ *     # The second one is formatted to have index from both catalogs, the sky position
+ *     # and the mags.
+ *     ind = elements[0].index(mag)             # <<<<<<<<<<<<<<
+ * 
+ *     mags = []
+ */
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_elements, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_mag) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_mag);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_ind = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":312
+ *     ind = elements[0].index(mag)
+ * 
+ *     mags = []             # <<<<<<<<<<<<<<
+ *     for i in range(len(obj)):
+ *         mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_mags = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":313
+ * 
+ *     mags = []
+ *     for i in range(len(obj)):             # <<<<<<<<<<<<<<
+ *         mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))
+ * 
+ */
+  __pyx_t_4 = PyObject_Length(__pyx_v_obj); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+    __pyx_t_1 = __pyx_t_3; __Pyx_INCREF(__pyx_t_1); __pyx_t_4 = 0;
+    __pyx_t_5 = NULL;
+  } else {
+    __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 313, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_5)) {
+      if (likely(PyList_CheckExact(__pyx_t_1))) {
+        if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 313, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      } else {
+        if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 313, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      }
+    } else {
+      __pyx_t_3 = __pyx_t_5(__pyx_t_1);
+      if (unlikely(!__pyx_t_3)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 313, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":314
+ *     mags = []
+ *     for i in range(len(obj)):
+ *         mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))             # <<<<<<<<<<<<<<
+ * 
+ *     new_mags = []
+ */
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_obj, __pyx_v_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_ind); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_data, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_obj, __pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_7 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_ind); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_7);
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_7);
+    __pyx_t_6 = 0;
+    __pyx_t_7 = 0;
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_mags, __pyx_t_3); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 314, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":313
+ * 
+ *     mags = []
+ *     for i in range(len(obj)):             # <<<<<<<<<<<<<<
+ *         mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))
+ * 
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":316
+ *         mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))
+ * 
+ *     new_mags = []             # <<<<<<<<<<<<<<
+ *     for i in range(len(mags)):
+ *         new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_new_mags = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":317
+ * 
+ *     new_mags = []
+ *     for i in range(len(mags)):             # <<<<<<<<<<<<<<
+ *         new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],
+ *                          data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
+ */
+  __pyx_t_4 = PyList_GET_SIZE(__pyx_v_mags); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+    __pyx_t_1 = __pyx_t_3; __Pyx_INCREF(__pyx_t_1); __pyx_t_4 = 0;
+    __pyx_t_5 = NULL;
+  } else {
+    __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 317, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_5)) {
+      if (likely(PyList_CheckExact(__pyx_t_1))) {
+        if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 317, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      } else {
+        if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 317, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      }
+    } else {
+      __pyx_t_3 = __pyx_t_5(__pyx_t_1);
+      if (unlikely(!__pyx_t_3)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 317, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "manage_catalog.pyx":318
+ *     new_mags = []
+ *     for i in range(len(mags)):
+ *         new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],             # <<<<<<<<<<<<<<
+ *                          data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
+ * 
+ */
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_d, __pyx_n_s_format); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_2 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_7);
+      if (likely(__pyx_t_2)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_2);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_7, function);
+      }
+    }
+    __pyx_t_3 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_2, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_obj, __pyx_v_i); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_7, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_7 = __Pyx_PyInt_AddObjC(__pyx_t_6, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_v_obj, __pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_6, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_obj, __pyx_v_i); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_10 = __Pyx_GetItemInt(__pyx_t_9, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_ind_ar); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+
+    /* "manage_catalog.pyx":319
+ *     for i in range(len(mags)):
+ *         new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],
+ *                          data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))             # <<<<<<<<<<<<<<
+ * 
+ *     return mags, new_mags
+ */
+    __pyx_t_9 = __Pyx_GetItemInt(__pyx_v_data, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_obj, __pyx_v_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_ind_dc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_mags, __pyx_v_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_mags, __pyx_v_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_12 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 319, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_12);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "manage_catalog.pyx":318
+ *     new_mags = []
+ *     for i in range(len(mags)):
+ *         new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],             # <<<<<<<<<<<<<<
+ *                          data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
+ * 
+ */
+    __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_7);
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_7);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_10);
+    PyTuple_SET_ITEM(__pyx_t_2, 3, __pyx_t_10);
+    __Pyx_GIVEREF(__pyx_t_11);
+    PyTuple_SET_ITEM(__pyx_t_2, 4, __pyx_t_11);
+    __Pyx_GIVEREF(__pyx_t_9);
+    PyTuple_SET_ITEM(__pyx_t_2, 5, __pyx_t_9);
+    __Pyx_GIVEREF(__pyx_t_12);
+    PyTuple_SET_ITEM(__pyx_t_2, 6, __pyx_t_12);
+    __pyx_t_3 = 0;
+    __pyx_t_7 = 0;
+    __pyx_t_6 = 0;
+    __pyx_t_10 = 0;
+    __pyx_t_11 = 0;
+    __pyx_t_9 = 0;
+    __pyx_t_12 = 0;
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_new_mags, __pyx_t_2); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 318, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "manage_catalog.pyx":317
+ * 
+ *     new_mags = []
+ *     for i in range(len(mags)):             # <<<<<<<<<<<<<<
+ *         new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],
+ *                          data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "manage_catalog.pyx":321
+ *                          data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
+ * 
+ *     return mags, new_mags             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_v_mags);
+  __Pyx_GIVEREF(__pyx_v_mags);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_mags);
+  __Pyx_INCREF(__pyx_v_new_mags);
+  __Pyx_GIVEREF(__pyx_v_new_mags);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_new_mags);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "manage_catalog.pyx":305
+ * 
+ * 
+ * def get_mag(data, elements, mag, obj, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Get the magnitudes of the cross-matched objects and return two lists:
+ *     # The first one has only the two mags from both catalogs;
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_12);
+  __Pyx_AddTraceback("manage_catalog.get_mag", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_ind);
+  __Pyx_XDECREF(__pyx_v_mags);
+  __Pyx_XDECREF(__pyx_v_i);
+  __Pyx_XDECREF(__pyx_v_new_mags);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -4498,17 +6790,23 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_n_s_ALPHA_J2000, __pyx_k_ALPHA_J2000, sizeof(__pyx_k_ALPHA_J2000), 0, 0, 1, 1},
-  {&__pyx_n_s_DELTA_J2000, __pyx_k_DELTA_J2000, sizeof(__pyx_k_DELTA_J2000), 0, 0, 1, 1},
+  {&__pyx_kp_s_Error_Catalogs_are_different, __pyx_k_Error_Catalogs_are_different, sizeof(__pyx_k_Error_Catalogs_are_different), 0, 0, 1, 0},
   {&__pyx_kp_s_Extension___csv, __pyx_k_Extension___csv, sizeof(__pyx_k_Extension___csv), 0, 0, 1, 0},
   {&__pyx_kp_s_Header_txt, __pyx_k_Header_txt, sizeof(__pyx_k_Header_txt), 0, 0, 1, 0},
+  {&__pyx_n_s_LoadLibrary, __pyx_k_LoadLibrary, sizeof(__pyx_k_LoadLibrary), 0, 0, 1, 1},
   {&__pyx_kp_s_Load_2f, __pyx_k_Load_2f, sizeof(__pyx_k_Load_2f), 0, 0, 1, 0},
+  {&__pyx_kp_s_MAG_CAT_1_MAG_CAT_2, __pyx_k_MAG_CAT_1_MAG_CAT_2, sizeof(__pyx_k_MAG_CAT_1_MAG_CAT_2), 0, 0, 1, 0},
+  {&__pyx_kp_s_Magnitudes_compared_csv, __pyx_k_Magnitudes_compared_csv, sizeof(__pyx_k_Magnitudes_compared_csv), 0, 0, 1, 0},
+  {&__pyx_kp_s_Number_Number_1_Number_2, __pyx_k_Number_Number_1_Number_2, sizeof(__pyx_k_Number_Number_1_Number_2), 0, 0, 1, 0},
   {&__pyx_kp_s_Number_of_founded_objects, __pyx_k_Number_of_founded_objects, sizeof(__pyx_k_Number_of_founded_objects), 0, 0, 1, 0},
   {&__pyx_kp_s_Save_Catalog_2f, __pyx_k_Save_Catalog_2f, sizeof(__pyx_k_Save_Catalog_2f), 0, 0, 1, 0},
   {&__pyx_n_s_TTYPE, __pyx_k_TTYPE, sizeof(__pyx_k_TTYPE), 0, 0, 1, 1},
   {&__pyx_kp_s__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 1, 0},
   {&__pyx_kp_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 0},
   {&__pyx_kp_s__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 0},
+  {&__pyx_kp_s__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 0, 1, 0},
+  {&__pyx_kp_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 0},
+  {&__pyx_kp_s__9, __pyx_k__9, sizeof(__pyx_k__9), 0, 0, 1, 0},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_ar, __pyx_k_ar, sizeof(__pyx_k_ar), 0, 0, 1, 1},
   {&__pyx_n_s_ar_list_1, __pyx_k_ar_list_1, sizeof(__pyx_k_ar_list_1), 0, 0, 1, 1},
@@ -4517,14 +6815,23 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_asarray, __pyx_k_asarray, sizeof(__pyx_k_asarray), 0, 0, 1, 1},
   {&__pyx_n_s_astropy_io, __pyx_k_astropy_io, sizeof(__pyx_k_astropy_io), 0, 0, 1, 1},
   {&__pyx_n_s_best, __pyx_k_best, sizeof(__pyx_k_best), 0, 0, 1, 1},
+  {&__pyx_n_s_c_lib, __pyx_k_c_lib, sizeof(__pyx_k_c_lib), 0, 0, 1, 1},
+  {&__pyx_n_s_c_name, __pyx_k_c_name, sizeof(__pyx_k_c_name), 0, 0, 1, 1},
   {&__pyx_n_s_cat_name, __pyx_k_cat_name, sizeof(__pyx_k_cat_name), 0, 0, 1, 1},
+  {&__pyx_n_s_cat_name_1, __pyx_k_cat_name_1, sizeof(__pyx_k_cat_name_1), 0, 0, 1, 1},
+  {&__pyx_n_s_cat_name_2, __pyx_k_cat_name_2, sizeof(__pyx_k_cat_name_2), 0, 0, 1, 1},
   {&__pyx_n_s_cat_open, __pyx_k_cat_open, sizeof(__pyx_k_cat_open), 0, 0, 1, 1},
+  {&__pyx_n_s_catalog_1, __pyx_k_catalog_1, sizeof(__pyx_k_catalog_1), 0, 0, 1, 1},
+  {&__pyx_n_s_catalog_2, __pyx_k_catalog_2, sizeof(__pyx_k_catalog_2), 0, 0, 1, 1},
   {&__pyx_n_s_catalog_file, __pyx_k_catalog_file, sizeof(__pyx_k_catalog_file), 0, 0, 1, 1},
+  {&__pyx_n_s_cdll, __pyx_k_cdll, sizeof(__pyx_k_cdll), 0, 0, 1, 1},
   {&__pyx_n_s_check, __pyx_k_check, sizeof(__pyx_k_check), 0, 0, 1, 1},
   {&__pyx_n_s_check_equal, __pyx_k_check_equal, sizeof(__pyx_k_check_equal), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_close, __pyx_k_close, sizeof(__pyx_k_close), 0, 0, 1, 1},
   {&__pyx_n_s_col, __pyx_k_col, sizeof(__pyx_k_col), 0, 0, 1, 1},
+  {&__pyx_n_s_ctypes, __pyx_k_ctypes, sizeof(__pyx_k_ctypes), 0, 0, 1, 1},
+  {&__pyx_kp_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 0},
   {&__pyx_n_s_data, __pyx_k_data, sizeof(__pyx_k_data), 0, 0, 1, 1},
   {&__pyx_n_s_dc, __pyx_k_dc, sizeof(__pyx_k_dc), 0, 0, 1, 1},
   {&__pyx_n_s_dc_list_1, __pyx_k_dc_list_1, sizeof(__pyx_k_dc_list_1), 0, 0, 1, 1},
@@ -4534,7 +6841,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_element, __pyx_k_element, sizeof(__pyx_k_element), 0, 0, 1, 1},
   {&__pyx_n_s_elements, __pyx_k_elements, sizeof(__pyx_k_elements), 0, 0, 1, 1},
   {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
+  {&__pyx_kp_s_entrada_csv, __pyx_k_entrada_csv, sizeof(__pyx_k_entrada_csv), 0, 0, 1, 0},
   {&__pyx_n_s_equal_objects, __pyx_k_equal_objects, sizeof(__pyx_k_equal_objects), 0, 0, 1, 1},
+  {&__pyx_n_s_execute_c, __pyx_k_execute_c, sizeof(__pyx_k_execute_c), 0, 0, 1, 1},
   {&__pyx_n_s_ext_names, __pyx_k_ext_names, sizeof(__pyx_k_ext_names), 0, 0, 1, 1},
   {&__pyx_n_s_extension, __pyx_k_extension, sizeof(__pyx_k_extension), 0, 0, 1, 1},
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
@@ -4546,9 +6855,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_get_data, __pyx_k_get_data, sizeof(__pyx_k_get_data), 0, 0, 1, 1},
   {&__pyx_n_s_get_header, __pyx_k_get_header, sizeof(__pyx_k_get_header), 0, 0, 1, 1},
   {&__pyx_n_s_get_info, __pyx_k_get_info, sizeof(__pyx_k_get_info), 0, 0, 1, 1},
+  {&__pyx_n_s_get_mag, __pyx_k_get_mag, sizeof(__pyx_k_get_mag), 0, 0, 1, 1},
+  {&__pyx_n_s_head, __pyx_k_head, sizeof(__pyx_k_head), 0, 0, 1, 1},
   {&__pyx_n_s_header, __pyx_k_header, sizeof(__pyx_k_header), 0, 0, 1, 1},
   {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
+  {&__pyx_n_s_ind, __pyx_k_ind, sizeof(__pyx_k_ind), 0, 0, 1, 1},
   {&__pyx_n_s_ind_ar, __pyx_k_ind_ar, sizeof(__pyx_k_ind_ar), 0, 0, 1, 1},
   {&__pyx_n_s_ind_dc, __pyx_k_ind_dc, sizeof(__pyx_k_ind_dc), 0, 0, 1, 1},
   {&__pyx_n_s_index, __pyx_k_index, sizeof(__pyx_k_index), 0, 0, 1, 1},
@@ -4557,30 +6869,47 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_j_list, __pyx_k_j_list, sizeof(__pyx_k_j_list), 0, 0, 1, 1},
   {&__pyx_n_s_k, __pyx_k_k, sizeof(__pyx_k_k), 0, 0, 1, 1},
   {&__pyx_n_s_line, __pyx_k_line, sizeof(__pyx_k_line), 0, 0, 1, 1},
+  {&__pyx_n_s_list_of_mag, __pyx_k_list_of_mag, sizeof(__pyx_k_list_of_mag), 0, 0, 1, 1},
+  {&__pyx_n_s_lista, __pyx_k_lista, sizeof(__pyx_k_lista), 0, 0, 1, 1},
+  {&__pyx_n_s_loaded, __pyx_k_loaded, sizeof(__pyx_k_loaded), 0, 0, 1, 1},
+  {&__pyx_n_s_loadtxt, __pyx_k_loadtxt, sizeof(__pyx_k_loadtxt), 0, 0, 1, 1},
   {&__pyx_n_s_m, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
+  {&__pyx_n_s_mag, __pyx_k_mag, sizeof(__pyx_k_mag), 0, 0, 1, 1},
+  {&__pyx_n_s_mags, __pyx_k_mags, sizeof(__pyx_k_mags), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_main_2, __pyx_k_main_2, sizeof(__pyx_k_main_2), 0, 0, 1, 1},
   {&__pyx_n_s_manage_catalog, __pyx_k_manage_catalog, sizeof(__pyx_k_manage_catalog), 0, 0, 1, 1},
   {&__pyx_kp_s_manage_catalog_pyx, __pyx_k_manage_catalog_pyx, sizeof(__pyx_k_manage_catalog_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_min, __pyx_k_min, sizeof(__pyx_k_min), 0, 0, 1, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
+  {&__pyx_n_s_name_csv, __pyx_k_name_csv, sizeof(__pyx_k_name_csv), 0, 0, 1, 1},
   {&__pyx_n_s_ndarray, __pyx_k_ndarray, sizeof(__pyx_k_ndarray), 0, 0, 1, 1},
   {&__pyx_n_s_new_data, __pyx_k_new_data, sizeof(__pyx_k_new_data), 0, 0, 1, 1},
+  {&__pyx_n_s_new_mags, __pyx_k_new_mags, sizeof(__pyx_k_new_mags), 0, 0, 1, 1},
   {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
   {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
+  {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_open, __pyx_k_open, sizeof(__pyx_k_open), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_print_info, __pyx_k_print_info, sizeof(__pyx_k_print_info), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
+  {&__pyx_n_s_read_c, __pyx_k_read_c, sizeof(__pyx_k_read_c), 0, 0, 1, 1},
+  {&__pyx_n_s_read_cross_match_csv, __pyx_k_read_cross_match_csv, sizeof(__pyx_k_read_cross_match_csv), 0, 0, 1, 1},
   {&__pyx_n_s_remove, __pyx_k_remove, sizeof(__pyx_k_remove), 0, 0, 1, 1},
   {&__pyx_n_s_replace, __pyx_k_replace, sizeof(__pyx_k_replace), 0, 0, 1, 1},
   {&__pyx_n_s_reshape, __pyx_k_reshape, sizeof(__pyx_k_reshape), 0, 0, 1, 1},
   {&__pyx_n_s_result, __pyx_k_result, sizeof(__pyx_k_result), 0, 0, 1, 1},
   {&__pyx_kp_s_s, __pyx_k_s, sizeof(__pyx_k_s), 0, 0, 1, 0},
+  {&__pyx_kp_s_saida_csv, __pyx_k_saida_csv, sizeof(__pyx_k_saida_csv), 0, 0, 1, 0},
   {&__pyx_n_s_save, __pyx_k_save, sizeof(__pyx_k_save), 0, 0, 1, 1},
+  {&__pyx_n_s_save_all_obj, __pyx_k_save_all_obj, sizeof(__pyx_k_save_all_obj), 0, 0, 1, 1},
   {&__pyx_n_s_save_catalog, __pyx_k_save_catalog, sizeof(__pyx_k_save_catalog), 0, 0, 1, 1},
+  {&__pyx_n_s_save_cross_match_csv, __pyx_k_save_cross_match_csv, sizeof(__pyx_k_save_cross_match_csv), 0, 0, 1, 1},
   {&__pyx_n_s_savetxt, __pyx_k_savetxt, sizeof(__pyx_k_savetxt), 0, 0, 1, 1},
+  {&__pyx_n_s_setup_catalog, __pyx_k_setup_catalog, sizeof(__pyx_k_setup_catalog), 0, 0, 1, 1},
+  {&__pyx_n_s_show_info, __pyx_k_show_info, sizeof(__pyx_k_show_info), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
   {&__pyx_n_s_sqrt, __pyx_k_sqrt, sizeof(__pyx_k_sqrt), 0, 0, 1, 1},
   {&__pyx_n_s_str_element, __pyx_k_str_element, sizeof(__pyx_k_str_element), 0, 0, 1, 1},
@@ -4595,7 +6924,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 23, __pyx_L1_error)
-  __pyx_builtin_min = __Pyx_GetBuiltinName(__pyx_n_s_min); if (!__pyx_builtin_min) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_builtin_min = __Pyx_GetBuiltinName(__pyx_n_s_min); if (!__pyx_builtin_min) __PYX_ERR(0, 203, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4634,10 +6963,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     data = get_data(catalog_file)  # Get the data
  *     col = len(data[0])  # length of columns
  */
-  __pyx_tuple__7 = PyTuple_Pack(11, __pyx_n_s_catalog_file, __pyx_n_s_ext_names, __pyx_n_s_str_element, __pyx_n_s_data, __pyx_n_s_col, __pyx_n_s_line, __pyx_n_s_new_data, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_array, __pyx_n_s_k); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_save_catalog, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(11, __pyx_n_s_catalog_file, __pyx_n_s_ext_names, __pyx_n_s_str_element, __pyx_n_s_data, __pyx_n_s_col, __pyx_n_s_line, __pyx_n_s_new_data, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_array, __pyx_n_s_k); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_save_catalog, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 15, __pyx_L1_error)
 
   /* "manage_catalog.pyx":42
  * 
@@ -4646,10 +6975,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     if save:
  *         # save the header of extension of interest
  */
-  __pyx_tuple__9 = PyTuple_Pack(8, __pyx_n_s_catalog_file, __pyx_n_s_save, __pyx_n_s_extension, __pyx_n_s_header, __pyx_n_s_dic, __pyx_n_s_element, __pyx_n_s_i, __pyx_n_s_str_element); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(3, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_header, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(8, __pyx_n_s_catalog_file, __pyx_n_s_save, __pyx_n_s_extension, __pyx_n_s_header, __pyx_n_s_dic, __pyx_n_s_element, __pyx_n_s_i, __pyx_n_s_str_element); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(3, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_header, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 42, __pyx_L1_error)
 
   /* "manage_catalog.pyx":71
  * 
@@ -4658,10 +6987,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     # Save the data
  *     data = catalog_file[extension].data
  */
-  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_n_s_catalog_file, __pyx_n_s_extension, __pyx_n_s_data); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 71, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_data, 71, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_catalog_file, __pyx_n_s_extension, __pyx_n_s_data); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_data, 71, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 71, __pyx_L1_error)
 
   /* "manage_catalog.pyx":81
  * 
@@ -4670,10 +6999,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     # Get information about names of extension of the .proccat
  *     info = catalog_file.info(0)
  */
-  __pyx_tuple__13 = PyTuple_Pack(6, __pyx_n_s_catalog_file, __pyx_n_s_print_info, __pyx_n_s_info, __pyx_n_s_size, __pyx_n_s_ext_names, __pyx_n_s_i); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 81, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_info, 81, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(6, __pyx_n_s_catalog_file, __pyx_n_s_print_info, __pyx_n_s_info, __pyx_n_s_size, __pyx_n_s_ext_names, __pyx_n_s_i); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_info, 81, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 81, __pyx_L1_error)
 
   /* "manage_catalog.pyx":102
  * 
@@ -4682,10 +7011,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     # Open the catalog
  *     catalog_file = fits.open(cat_name)
  */
-  __pyx_tuple__15 = PyTuple_Pack(2, __pyx_n_s_cat_name, __pyx_n_s_catalog_file); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 102, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_cat_open, 102, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(2, __pyx_n_s_cat_name, __pyx_n_s_catalog_file); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_cat_open, 102, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 102, __pyx_L1_error)
 
   /* "manage_catalog.pyx":112
  * 
@@ -4694,34 +7023,118 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     catalog_file.close()
  * 
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_n_s_catalog_file); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 112, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_close, 112, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_n_s_catalog_file); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_close, 112, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 112, __pyx_L1_error)
 
-  /* "manage_catalog.pyx":118
- * ######################################################################################
+  /* "manage_catalog.pyx":119
  * 
- * def find_index(data, elements):             # <<<<<<<<<<<<<<
  * 
- *     ar = "ALPHA_J2000"
+ * def setup_catalog(cat_name_1, cat_name_2, show_info=False):             # <<<<<<<<<<<<<<
+ *     # Configure catalogs
+ *     catalog_1 = cat_open(cat_name_1)
  */
-  __pyx_tuple__19 = PyTuple_Pack(21, __pyx_n_s_data, __pyx_n_s_elements, __pyx_n_s_ar, __pyx_n_s_dc, __pyx_n_s_ind_ar, __pyx_n_s_ind_dc, __pyx_n_s_ar_list_1, __pyx_n_s_dc_list_1, __pyx_n_s_ar_list_2, __pyx_n_s_dc_list_2, __pyx_n_s_i, __pyx_n_s_equal_objects, __pyx_n_s_tam, __pyx_n_s_tam2, __pyx_n_s_found, __pyx_n_s_x, __pyx_n_s_j_list, __pyx_n_s_j, __pyx_n_s_check, __pyx_n_s_result, __pyx_n_s_best); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 118, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 21, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_find_index, 118, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(7, __pyx_n_s_cat_name_1, __pyx_n_s_cat_name_2, __pyx_n_s_show_info, __pyx_n_s_catalog_1, __pyx_n_s_catalog_2, __pyx_n_s_elements, __pyx_n_s_data); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_setup_catalog, 119, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 119, __pyx_L1_error)
 
-  /* "manage_catalog.pyx":168
+  /* "manage_catalog.pyx":146
  * 
  * 
  * def check_equal(n, m, x, y, threshold=3, value=False):             # <<<<<<<<<<<<<<
- *     # threshold in arcsecond
- *     # need to transform to degrees
+ *     # This function detects if one object, with AR and DEC (x and y), are inside a
+ *     # circle with radius "threshold" and center set by another object (n and m).
  */
-  __pyx_tuple__21 = PyTuple_Pack(7, __pyx_n_s_n, __pyx_n_s_m, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_threshold, __pyx_n_s_value, __pyx_n_s_module); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 168, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_check_equal, 168, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(7, __pyx_n_s_n, __pyx_n_s_m, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_threshold, __pyx_n_s_value, __pyx_n_s_module); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_check_equal, 146, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 146, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":167
+ * 
+ * 
+ * def find_index(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Detects which objects on two given catalogs (data) are the same object
+ *     # (CROSS-MATCH). Returns the indexes of the cross-matched objects.
+ */
+  __pyx_tuple__26 = PyTuple_Pack(18, __pyx_n_s_data, __pyx_n_s_ind_ar, __pyx_n_s_ind_dc, __pyx_n_s_ar_list_1, __pyx_n_s_dc_list_1, __pyx_n_s_ar_list_2, __pyx_n_s_dc_list_2, __pyx_n_s_i, __pyx_n_s_equal_objects, __pyx_n_s_tam, __pyx_n_s_tam2, __pyx_n_s_found, __pyx_n_s_x, __pyx_n_s_j_list, __pyx_n_s_j, __pyx_n_s_check, __pyx_n_s_result, __pyx_n_s_best); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(3, 0, 18, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_find_index, 167, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 167, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":216
+ * 
+ * 
+ * def read_cross_match_csv(name_csv):             # <<<<<<<<<<<<<<
+ *     # Read the csv file Magnitudes_compared.csv and returns the indexes of the
+ *     # cross-matched objects.
+ */
+  __pyx_tuple__28 = PyTuple_Pack(4, __pyx_n_s_name_csv, __pyx_n_s_loaded, __pyx_n_s_equal_objects, __pyx_n_s_i); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_read_cross_match_csv, 216, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 216, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":232
+ * 
+ * 
+ * def save_cross_match_csv(list_of_mag, ar, dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file that contain the cross-matched objects, their positional in sky
+ *     # and the two mags from both catalogs.
+ */
+  __pyx_tuple__30 = PyTuple_Pack(4, __pyx_n_s_list_of_mag, __pyx_n_s_ar, __pyx_n_s_dc, __pyx_n_s_head); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_save_cross_match_csv, 232, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 232, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":242
+ * 
+ * 
+ * def save_all_obj(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file to C code read and do the cross-match.
+ *     ar_list_1 = []
+ */
+  __pyx_tuple__32 = PyTuple_Pack(9, __pyx_n_s_data, __pyx_n_s_ind_ar, __pyx_n_s_ind_dc, __pyx_n_s_ar_list_1, __pyx_n_s_dc_list_1, __pyx_n_s_ar_list_2, __pyx_n_s_dc_list_2, __pyx_n_s_i, __pyx_n_s_lista); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__32);
+  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_save_all_obj, 242, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 242, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":276
+ * 
+ * 
+ * def execute_c(c_name):             # <<<<<<<<<<<<<<
+ *     # Execute the function py_script from a C code with the name c_name.
+ *     import ctypes
+ */
+  __pyx_tuple__34 = PyTuple_Pack(3, __pyx_n_s_c_name, __pyx_n_s_ctypes, __pyx_n_s_c_lib); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__34);
+  __Pyx_GIVEREF(__pyx_tuple__34);
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_execute_c, 276, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 276, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":288
+ * 
+ * 
+ * def read_c():             # <<<<<<<<<<<<<<
+ *     # Read the output csv file generated by the C code and returns the indexes of the
+ *     # cross-matched objects.
+ */
+  __pyx_tuple__36 = PyTuple_Pack(4, __pyx_n_s_name_csv, __pyx_n_s_loaded, __pyx_n_s_equal_objects, __pyx_n_s_i); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 288, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__36);
+  __Pyx_GIVEREF(__pyx_tuple__36);
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_read_c, 288, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 288, __pyx_L1_error)
+
+  /* "manage_catalog.pyx":305
+ * 
+ * 
+ * def get_mag(data, elements, mag, obj, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Get the magnitudes of the cross-matched objects and return two lists:
+ *     # The first one has only the two mags from both catalogs;
+ */
+  __pyx_tuple__38 = PyTuple_Pack(10, __pyx_n_s_data, __pyx_n_s_elements, __pyx_n_s_mag, __pyx_n_s_obj, __pyx_n_s_ind_ar, __pyx_n_s_ind_dc, __pyx_n_s_ind, __pyx_n_s_mags, __pyx_n_s_i, __pyx_n_s_new_mags); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__38);
+  __Pyx_GIVEREF(__pyx_tuple__38);
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(6, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_manage_catalog_pyx, __pyx_n_s_get_mag, 305, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 305, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4733,12 +7146,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   __pyx_umethod_PyList_Type_index.type = (PyObject*)&PyList_Type;
   __pyx_umethod_PyList_Type_remove.type = (PyObject*)&PyList_Type;
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  __pyx_float_0_ = PyFloat_FromDouble(0.); if (unlikely(!__pyx_float_0_)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_2 = PyInt_FromLong(2); if (unlikely(!__pyx_int_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_3 = PyInt_FromLong(3); if (unlikely(!__pyx_int_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_100 = PyInt_FromLong(100); if (unlikely(!__pyx_int_100)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_3600 = PyInt_FromLong(3600); if (unlikely(!__pyx_int_3600)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4979,7 +7394,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_manage_catalog) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
@@ -5111,28 +7526,112 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_close, __pyx_t_2) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "manage_catalog.pyx":118
- * ######################################################################################
+  /* "manage_catalog.pyx":119
  * 
- * def find_index(data, elements):             # <<<<<<<<<<<<<<
  * 
- *     ar = "ALPHA_J2000"
+ * def setup_catalog(cat_name_1, cat_name_2, show_info=False):             # <<<<<<<<<<<<<<
+ *     # Configure catalogs
+ *     catalog_1 = cat_open(cat_name_1)
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_13find_index, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_13setup_catalog, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_index, __pyx_t_2) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_setup_catalog, __pyx_t_2) < 0) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "manage_catalog.pyx":168
+  /* "manage_catalog.pyx":146
  * 
  * 
  * def check_equal(n, m, x, y, threshold=3, value=False):             # <<<<<<<<<<<<<<
- *     # threshold in arcsecond
- *     # need to transform to degrees
+ *     # This function detects if one object, with AR and DEC (x and y), are inside a
+ *     # circle with radius "threshold" and center set by another object (n and m).
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_15check_equal, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_15check_equal, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_check_equal, __pyx_t_2) < 0) __PYX_ERR(0, 168, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_check_equal, __pyx_t_2) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":167
+ * 
+ * 
+ * def find_index(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Detects which objects on two given catalogs (data) are the same object
+ *     # (CROSS-MATCH). Returns the indexes of the cross-matched objects.
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_17find_index, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_index, __pyx_t_2) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":216
+ * 
+ * 
+ * def read_cross_match_csv(name_csv):             # <<<<<<<<<<<<<<
+ *     # Read the csv file Magnitudes_compared.csv and returns the indexes of the
+ *     # cross-matched objects.
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_19read_cross_match_csv, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_read_cross_match_csv, __pyx_t_2) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":232
+ * 
+ * 
+ * def save_cross_match_csv(list_of_mag, ar, dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file that contain the cross-matched objects, their positional in sky
+ *     # and the two mags from both catalogs.
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_21save_cross_match_csv, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_save_cross_match_csv, __pyx_t_2) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":242
+ * 
+ * 
+ * def save_all_obj(data, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Save a csv file to C code read and do the cross-match.
+ *     ar_list_1 = []
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_23save_all_obj, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_save_all_obj, __pyx_t_2) < 0) __PYX_ERR(0, 242, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":276
+ * 
+ * 
+ * def execute_c(c_name):             # <<<<<<<<<<<<<<
+ *     # Execute the function py_script from a C code with the name c_name.
+ *     import ctypes
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_25execute_c, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_execute_c, __pyx_t_2) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":288
+ * 
+ * 
+ * def read_c():             # <<<<<<<<<<<<<<
+ *     # Read the output csv file generated by the C code and returns the indexes of the
+ *     # cross-matched objects.
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_27read_c, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 288, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_read_c, __pyx_t_2) < 0) __PYX_ERR(0, 288, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "manage_catalog.pyx":305
+ * 
+ * 
+ * def get_mag(data, elements, mag, obj, ind_ar, ind_dc):             # <<<<<<<<<<<<<<
+ *     # Get the magnitudes of the cross-matched objects and return two lists:
+ *     # The first one has only the two mags from both catalogs;
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14manage_catalog_29get_mag, NULL, __pyx_n_s_manage_catalog); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_mag, __pyx_t_2) < 0) __PYX_ERR(0, 305, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "manage_catalog.pyx":1
@@ -6227,6 +8726,130 @@ bad:
     Py_XDECREF(args);
     return result;
 }
+
+/* PyIntBinop */
+#if !CYTHON_COMPILING_IN_PYPY
+static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, int inplace, int zerodivision_check) {
+    (void)inplace;
+    (void)zerodivision_check;
+    #if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_CheckExact(op1))) {
+        const long b = intval;
+        long x;
+        long a = PyInt_AS_LONG(op1);
+            x = (long)((unsigned long)a - b);
+            if (likely((x^a) >= 0 || (x^~b) >= 0))
+                return PyInt_FromLong(x);
+            return PyLong_Type.tp_as_number->nb_subtract(op1, op2);
+    }
+    #endif
+    #if CYTHON_USE_PYLONG_INTERNALS
+    if (likely(PyLong_CheckExact(op1))) {
+        const long b = intval;
+        long a, x;
+#ifdef HAVE_LONG_LONG
+        const PY_LONG_LONG llb = intval;
+        PY_LONG_LONG lla, llx;
+#endif
+        const digit* digits = ((PyLongObject*)op1)->ob_digit;
+        const Py_ssize_t size = Py_SIZE(op1);
+        if (likely(__Pyx_sst_abs(size) <= 1)) {
+            a = likely(size) ? digits[0] : 0;
+            if (size == -1) a = -a;
+        } else {
+            switch (size) {
+                case -2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case 2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case -3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case 3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case -4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case 4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                default: return PyLong_Type.tp_as_number->nb_subtract(op1, op2);
+            }
+        }
+                x = a - b;
+            return PyLong_FromLong(x);
+#ifdef HAVE_LONG_LONG
+        long_long:
+                llx = lla - llb;
+            return PyLong_FromLongLong(llx);
+#endif
+        
+        
+    }
+    #endif
+    if (PyFloat_CheckExact(op1)) {
+        const long b = intval;
+        double a = PyFloat_AS_DOUBLE(op1);
+            double result;
+            PyFPE_START_PROTECT("subtract", return NULL)
+            result = ((double)a) - (double)b;
+            PyFPE_END_PROTECT(result)
+            return PyFloat_FromDouble(result);
+    }
+    return (inplace ? PyNumber_InPlaceSubtract : PyNumber_Subtract)(op1, op2);
+}
+#endif
 
 /* Import */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {

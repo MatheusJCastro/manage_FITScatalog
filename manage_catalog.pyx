@@ -1,8 +1,8 @@
 ###########################################
 # Manage Fits Catalog                     #
 # Matheus J. Castro                       #
-# Version 2.4                             #
-# Last Modification: 17/09/2019           #
+# Version 3.1                             #
+# Last Modification: 18/10/2019           #
 ###########################################
 
 import numpy as np
@@ -115,13 +115,58 @@ def close(catalog_file):
 
 ######################################################################################
 
-def find_index(data, elements):
 
-    ar = "ALPHA_J2000"
-    dc = "DELTA_J2000"
+def setup_catalog(cat_name_1, cat_name_2, show_info=False):
+    # Configure catalogs
+    catalog_1 = cat_open(cat_name_1)
+    catalog_2 = cat_open(cat_name_2)
 
-    ind_ar = elements[0].index(ar)
-    ind_dc = elements[0].index(dc)
+    # show info about catalogs
+    if show_info:
+        print(get_info(catalog_1)[0])
+        print(get_info(catalog_2)[0])
+
+    elements = (get_header(catalog_1)[0], get_header(catalog_2)[0])
+    # elements of catalog 1 and 2
+
+    if elements[0] != elements[1]:
+        print("Error: Catalogs are different.")
+        return -1
+
+    data = (get_data(catalog_1), get_data(catalog_2))  # data of catalogs
+    close(catalog_1)
+    close(catalog_2)
+
+    return data, elements
+
+
+######################################################################################
+
+
+def check_equal(n, m, x, y, threshold=3, value=False):
+    # This function detects if one object, with AR and DEC (x and y), are inside a
+    # circle with radius "threshold" and center set by another object (n and m).
+    # It can returns True, False or de module of the distance.
+
+    # threshold in given in arcsecond
+    # it's needed to transform to degrees
+    threshold = threshold / 60**2
+    module = np.sqrt((n-x)**2 + (m-y)**2)
+
+    if value:
+        return module
+    elif module <= threshold:
+        return True
+    else:
+        return False
+
+
+######################################################################################
+
+
+def find_index(data, ind_ar, ind_dc):
+    # Detects which objects on two given catalogs (data) are the same object
+    # (CROSS-MATCH). Returns the indexes of the cross-matched objects.
 
     ar_list_1 = []
     dc_list_1 = []
@@ -162,18 +207,118 @@ def find_index(data, elements):
     print(equal_objects)
     print("Number of founded objects:", len(equal_objects))
 
-    return equal_objects, ar, ind_ar, dc, ind_dc
+    return equal_objects
 
 
-def check_equal(n, m, x, y, threshold=3, value=False):
-    # threshold in arcsecond
-    # need to transform to degrees
-    threshold = threshold / 60**2
-    module = np.sqrt((n-x)**2 + (m-y)**2)
+######################################################################################
 
-    if value:
-        return module
-    elif module <= threshold:
-        return True
+
+def read_cross_match_csv(name_csv):
+    # Read the csv file Magnitudes_compared.csv and returns the indexes of the
+    # cross-matched objects.
+
+    loaded = np.loadtxt(name_csv, delimiter=",")
+
+    equal_objects = []
+    for i in range(len(loaded)):
+        equal_objects.append((int(loaded[i][1]-1), int(loaded[i][2]-1)))
+
+    return equal_objects
+
+
+######################################################################################
+
+
+def save_cross_match_csv(list_of_mag, ar, dc):
+    # Save a csv file that contain the cross-matched objects, their positional in sky
+    # and the two mags from both catalogs.
+    head = "Number, Number_1, Number_2, " + ar + ", " + dc + ", MAG_CAT_1, MAG_CAT_2"
+    np.savetxt("Magnitudes_compared.csv", list_of_mag, header=head, fmt="%s", delimiter=",")
+
+
+######################################################################################
+
+
+def save_all_obj(data, ind_ar, ind_dc):
+    # Save a csv file to C code read and do the cross-match.
+    ar_list_1 = []
+    dc_list_1 = []
+    ar_list_2 = []
+    dc_list_2 = []
+    for i in range(len(data[0])):
+        ar_list_1.append(data[0][i][ind_ar])
+        dc_list_1.append(data[0][i][ind_dc])
+    for i in range(len(data[1])):
+        ar_list_2.append(data[1][i][ind_ar])
+        dc_list_2.append(data[1][i][ind_dc])
+
+    lista = [(len(data[0]), len(data[1]))]
+
+    if len(data[0]) >= len(data[1]):
+        for i in range(len(data[0])):
+            if i < len(data[1]):
+                lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+            else:
+                lista.append((ar_list_1[i], dc_list_1[i], 0., 0.))
     else:
-        return False
+        for i in range(len(data[1])):
+            if i < len(data[0]):
+                lista.append((ar_list_1[i], dc_list_1[i], ar_list_2[i], dc_list_2[i]))
+            else:
+                lista.append((0., 0., ar_list_2[i], dc_list_2[i]))
+
+    np.savetxt("entrada.csv", lista, fmt="%s", delimiter=";")
+
+
+######################################################################################
+
+
+def execute_c(c_name):
+    # Execute the function py_script from a C code with the name c_name.
+    import ctypes
+
+    c_lib = ctypes.cdll.LoadLibrary("./{}".format(c_name))
+    # c_lib.py_script()
+    c_lib.main()
+
+
+######################################################################################
+
+
+def read_c():
+    # Read the output csv file generated by the C code and returns the indexes of the
+    # cross-matched objects.
+    name_csv = "saida.csv"
+
+    loaded = np.loadtxt(name_csv, delimiter=",")
+
+    equal_objects = []
+    for i in range(len(loaded)):
+        equal_objects.append((int(loaded[i][0] - 1), int(loaded[i][1] - 1)))
+
+    return equal_objects
+
+
+######################################################################################
+
+
+def get_mag(data, elements, mag, obj, ind_ar, ind_dc):
+    # Get the magnitudes of the cross-matched objects and return two lists:
+    # The first one has only the two mags from both catalogs;
+    # The second one is formatted to have index from both catalogs, the sky position
+    # and the mags.
+    ind = elements[0].index(mag)
+
+    mags = []
+    for i in range(len(obj)):
+        mags.append((data[0][obj[i][0]][ind], data[1][obj[i][1]][ind]))
+
+    new_mags = []
+    for i in range(len(mags)):
+        new_mags.append(("{:d}".format(i+1), obj[i][0]+1, obj[i][1]+1, data[0][obj[i][0]][ind_ar],
+                         data[0][obj[i][0]][ind_dc], mags[i][0], mags[i][1]))
+
+    return mags, new_mags
+
+
+######################################################################################

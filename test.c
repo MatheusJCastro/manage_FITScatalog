@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+// Cross-Match Fits Catalog              //
+// Matheus J. Castro                     //
+// Version 6.4                           //
+// Last Modification: 18/10/2019         //
+///////////////////////////////////////////
+
 #include<stdio.h>
 #include<math.h>
 #include<time.h>
