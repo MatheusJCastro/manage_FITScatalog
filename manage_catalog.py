@@ -279,8 +279,13 @@ def execute_c(c_name, threshold, changedot = 0):
 
     c_lib = ctypes.CDLL("./{}".format(c_name))
     c_lib.py_script.argtypes = (ctypes.c_double, ctypes.c_int)
-    c_lib.py_script(threshold, changedot)  # Call function py_script on C code
+    c_lib.py_script_resttype = ctypes.c_int
+    founded = c_lib.py_script(threshold, changedot)  # Call function py_script on C code
     # c_lib.main(None)  # Call function main on C code
+
+    return founded
+    # Just execute this return if you are executing the py_script function on C,
+    # if you are executing the main function, comment the return line.
 
 
 ######################################################################################

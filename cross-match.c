@@ -165,7 +165,7 @@ int py_script(double thresh, int changedot_def)
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time C: %f\n", time_spent);
 
-    return 0;
+    return founded;
 }
 
 int main()
