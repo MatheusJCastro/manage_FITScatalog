@@ -8,9 +8,9 @@
 #include<stdio.h>
 #include<math.h>
 #include<time.h>
+#include<string.h>
 
 #define MAX 100000 // The maximum of objects that a catalog can contain.
-#define range 3 // In arcseconds, the threshold that two objects can be considered the same.
 
 void changedot(char name_in[100], char name_in_mod[100])
 {
@@ -79,7 +79,7 @@ int check_equal(double n, double m, double x, double y, double threshold)
         return 0; // Return 0 if it's outside.
 }
 
-int cross_match(int index[2][MAX], double coord[4][MAX], int lens[2], int *len)
+int cross_match(int index[2][MAX], double coord[4][MAX], int lens[2], int *len, double range)
 {
     // Do the cross-match of the catalogs.
     int count = 0;
@@ -134,10 +134,11 @@ void save_arq(char name_out[100], int index[2][MAX], int founded)
     fclose(csv_write);
 }
 
-int py_script()
+int py_script(double thresh, int changedot_def)
 {
-    // Call this function as you main function if you want to change the dots of the entrada.csv file.
-    // If it's not what you want, call the normal main function.
+    // Call this function as you main function if you are running the code from python.
+    // If you are running direct on terminal, call the normal main function.
+    // In arcseconds, the threshold is the number that two objects can be considered the same.
     clock_t begin = clock();
 
     char name_in[100] = ".entrada.csv";
@@ -151,9 +152,13 @@ int py_script()
     // coord is the matrix that will contain all the positions of all objects in two catalogs using the same logic as the file entrada.csv.
     // index is the matrix that will contain the cross-match index whit the two catalogs in the table entrada.csv.
 
-    changedot(name_in, name_in_mod);
+    if (changedot_def == 1)
+        changedot(name_in, name_in_mod);
+    else
+        strcpy(name_in_mod, name_in);
+
     read_arq(name_in_mod, coord, lens, &len);
-    int founded = cross_match(index, coord, lens, &len);
+    int founded = cross_match(index, coord, lens, &len, thresh);
     save_arq(name_out, index, founded);
 
     clock_t end = clock();
@@ -165,10 +170,10 @@ int py_script()
 
 int main()
 {
-    // This is your main function only if you don't want to change the dots of entrada.csv file.
-    // If you want to change it, use the py_script function as your main function.
-    // Check the changedot function for more details.
+    // This is your main function only if you are running direct from terminal.
+    // If you are running from a Python code, use the py_script function as your main function.
     clock_t begin = clock();
+    double thresh = 3;
 
     char name_in_mod[100] = ".entrada.csv";
     char name_out[100] = ".saida.csv";
@@ -181,7 +186,7 @@ int main()
     // index is the matrix that will contain the cross-match index whit the two catalogs in the table entrada.csv.
 
     read_arq(name_in_mod, coord, lens, &len);
-    int founded = cross_match(index, coord, lens, &len);
+    int founded = cross_match(index, coord, lens, &len, thresh);
     save_arq(name_out, index, founded);
 
     clock_t end = clock();

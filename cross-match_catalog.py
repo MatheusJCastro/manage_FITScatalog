@@ -111,6 +111,7 @@ right_ascension_column = "ALPHA_J2000"
 declination_column = "DELTA_J2000"
 c_code_name = "cross-match.so"
 mag_to_use = "MAG_AUTO"
+threshold = 0.25  # In arcseconds.
 
 data, elements = mancat.setup_catalog(cat_name_1, cat_name_2)
 
@@ -120,7 +121,7 @@ ind_delta = elements[0].index(declination_column)
 mancat.save_all_obj(data, ind_alpha, ind_delta)
 # objects = mancat.find_index(data, ind_alpha, ind_delta)
 # objects = mancat.read_cross_match_csv(elements, csv_to_read, right_ascension_column, declination_column)
-mancat.execute_c(c_code_name)
+mancat.execute_c(c_code_name, threshold)
 objects = mancat.read_c()
 mancat.del_temp_files()  # Delete the temporary files created because of C code
 mag_pos_list = mancat.get_mag(data, elements, mag_to_use, objects, ind_alpha, ind_delta)[1]

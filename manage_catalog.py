@@ -273,13 +273,14 @@ def save_all_obj(data, ind_ar, ind_dc):
 ######################################################################################
 
 
-def execute_c(c_name):
+def execute_c(c_name, threshold, changedot = 0):
     # Execute the function py_script from a C code with the name c_name.
     import ctypes
 
-    c_lib = ctypes.cdll.LoadLibrary("./{}".format(c_name))
-    # c_lib.py_script()
-    c_lib.main()
+    c_lib = ctypes.CDLL("./{}".format(c_name))
+    c_lib.py_script.argtypes = (ctypes.c_double, ctypes.c_int)
+    c_lib.py_script(threshold, changedot)  # Call function py_script on C code
+    # c_lib.main(None)  # Call function main on C code
 
 
 ######################################################################################
