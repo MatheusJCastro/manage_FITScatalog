@@ -1,2 +1,19 @@
-gcc test.c -fPIC -shared -o test.so -lm
-python3 setup.py build_ext --inplace
+Shared Lib to python:
+	gcc cross-match.c -fPIC -shared -o cross-match.so -lm
+Compile C normally (with the math library link):
+	gcc -o cross-match cross-match.c -lm
+
+Cython:
+	python3 setup.py build_ext --inplace
+
+
+
+
+
+setup.py file:
+from distutils.core import setup
+from Cython.Build import cythonize
+
+setup(
+    ext_modules = cythonize("manage_catalog.pyx"), requires=['numpy', 'astropy', 'matplotlib']
+)

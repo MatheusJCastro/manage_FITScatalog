@@ -1,9 +1,9 @@
-###########################################
-# Cross-Match Fits Catalog                #
-# Matheus J. Castro                       #
-# Version 6.4                             #
-# Last Modification: 18/10/2019           #
-###########################################
+###################################################
+# Cross-Match Fits Catalog                        #
+# Matheus J. Castro                               #
+# Version 6.5                                     #
+# Last Modification: 01/12/2020 (month/day/year)  #
+###################################################
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -109,7 +109,7 @@ cat_name_2 = 'j02-20151112T010354-01_proc.proccat'
 csv_to_read = "Magnitudes_compared.csv"
 right_ascension_column = "ALPHA_J2000"
 declination_column = "DELTA_J2000"
-c_code_name = "test.so"
+c_code_name = "cross-match.so"
 mag_to_use = "MAG_AUTO"
 
 data, elements = mancat.setup_catalog(cat_name_1, cat_name_2)
@@ -122,6 +122,7 @@ mancat.save_all_obj(data, ind_alpha, ind_delta)
 # objects = mancat.read_cross_match_csv(elements, csv_to_read, right_ascension_column, declination_column)
 mancat.execute_c(c_code_name)
 objects = mancat.read_c()
+mancat.del_temp_files()  # Delete the temporary files created because of C code
 mag_pos_list = mancat.get_mag(data, elements, mag_to_use, objects, ind_alpha, ind_delta)[1]
 # mancat.save_cross_match_csv(mag_pos_list, right_ascension_column, declination_column)
 
