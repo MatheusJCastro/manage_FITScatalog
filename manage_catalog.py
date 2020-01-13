@@ -1,7 +1,7 @@
 ###################################################
 # Manage Fits Catalog                             #
 # Matheus J. Castro                               #
-# Version 4.0                                     #
+# Version 4.2                                     #
 # Last Modification: 01/12/2020 (month/day/year)  #
 ###################################################
 
