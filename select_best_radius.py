@@ -11,13 +11,14 @@ import cross_match_catalog as cross_cat
 import time
 
 
-def plot_radius(radius, arcsec, save=False, show=False):
+def plot_radius(radius, arcsec, step_show=1, save=False, show=False):
 
     plt.figure(figsize=(5, 5))
+    plt.grid(True)
+    plt.xticks(np.arange(0, max(arcsec)+1, step_show))
+    plt.xlim(0, max(arcsec))
     plt.xlabel("Radius Used (arcsec)")
     plt.ylabel("Founded Objects")
-    # plt.xlim(56, 57.8)
-    # plt.ylim(23.3, 24.9)
     plt.title("Founded Objects for each Search Radius")
     plt.plot(arcsec, radius, ".", markersize=5, color="blue")
 
@@ -42,7 +43,6 @@ def main(cat_name_1, cat_name_2, init, end, step):
         partial = time.time()
         print("Total time spent: {:.2f}s".format(partial - inicio))
 
-    print(founded)
     fim = time.time()
     print("\033[1;97;42mTime spent to find best radius: {:.2f}s\033[0;0;0m".format(fim - inicio))
 
@@ -52,7 +52,7 @@ def main(cat_name_1, cat_name_2, init, end, step):
 cat_1 = 'j02-20151112T005311-01_proc.proccat'
 cat_2 = 'j02-20151112T010354-01_proc.proccat'
 
-init_thresh = 0.25
+init_thresh = 0.5
 end_thresh = 1
-step_size = 0.25
+step_size = 0.5
 main(cat_1, cat_2, init_thresh, end_thresh, step_size)
