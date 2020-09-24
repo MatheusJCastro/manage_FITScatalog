@@ -156,6 +156,6 @@ def main(cat_name_1, cat_name_2, mag_to_use1="MAG_AUTO", mag_to_use2="MAG_AUTO",
 
 
 # To run this code independently, uncomment the follow lines:
-# cat_1 = 'j02-20151112T005311-01_proc.proccat'
-# cat_2 = 'j02-20151112T010354-01_proc.proccat'
-# main(cat_1, cat_2, threshold=3, plot=True)
+cat_1 = 'j02-20151112T005311-01_proc.proccat'
+cat_2 = 'j02-20151112T010354-01_proc.proccat'
+main(cat_1, cat_2, threshold=3, save_cross_match=True, plot=True)

@@ -265,15 +265,15 @@ def save_all_obj(data, ra, dc):
     if len(data[0]) >= len(data[1]):
         for i in range(len(data[0])):
             if i < len(data[1]):
-                c_list.append((data[0][ra][i], data[0][dc][i], data[1][ra][i], data[1][dc][i]))
+                c_list.append((data[0][i][ra], data[0][i][dc], data[1][i][ra], data[1][i][dc]))
             else:
-                c_list.append((data[0][ra][i], data[0][dc][i], 0., 0.))
+                c_list.append((data[0][i][ra], data[0][i][dc], 0., 0.))
     else:
         for i in range(len(data[1])):
             if i < len(data[0]):
-                c_list.append((data[0][ra][i], data[0][dc][i], data[1][ra][i], data[1][dc][i]))
+                c_list.append((data[0][i][ra], data[0][i][dc], data[1][i][ra], data[1][i][dc]))
             else:
-                c_list.append((0., 0., data[1][ra][i], data[1][dc][i]))
+                c_list.append((0., 0., data[1][i][ra], data[1][i][dc]))
 
     np.savetxt(".entrada.csv", c_list, fmt="%s", delimiter=";")
 
